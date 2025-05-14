@@ -1,0 +1,46 @@
+
+/* Custom styles for Rosana widget */
+#rosana-widget-button {
+  background-color: #F97316 !important; /* Temu orange */
+  border-radius: 50% !important;
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3) !important;
+  transition: all 0.3s ease !important;
+  z-index: 100 !important;
+}
+
+#rosana-widget-button:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 15px rgba(249, 115, 22, 0.4) !important;
+}
+
+.rosana-widget-container {
+  font-family: 'Poppins', sans-serif !important;
+  z-index: 9999 !important;
+}
+
+/* To ensure the widget is always on top */
+#rosana-widget {
+  z-index: 9999 !important;
+}
+
+.rosana-widget-iframe {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Pulse effect for the chat button */
+.human-support-badge {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+  }
+}

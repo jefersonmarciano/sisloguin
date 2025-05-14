@@ -1,0 +1,30 @@
+
+export default {
+  supportWelcome: "¡Estamos aquí para ayudarte!",
+  supportSubheading: "Encuentra respuestas o conéctate con nosotros",
+  searchHelp: "Buscar ayuda...",
+  frequentlyAskedQuestions: "Preguntas Frecuentes",
+  contactUs: "Contáctanos",
+  liveChat: "Chat en Vivo",
+  liveChatDescription: "Chatea con nuestro equipo de soporte en tiempo real",
+  liveChatPrompt: "Obtén respuestas rápidas a tus preguntas de nuestro amable equipo de soporte.",
+  startChat: "Iniciar Chat",
+  emailSupport: "Soporte por Email",
+  emailSupportDescription: "Envíanos un mensaje detallado",
+  emailSupportPrompt: "Para problemas complejos, envíanos un email y responderemos en 24 horas.",
+  sendEmail: "Enviar Email",
+  visitSupport: "Visitar Soporte",
+  needHelp: "¿Necesitas Ayuda?",
+  visitSupportCenter: "Visitar Centro de Soporte",
+  supportCenter: "Centro de Soporte",
+  noFAQsMatch: "No hay preguntas frecuentes que coincidan con tu búsqueda. Intenta con otras palabras clave.",
+  error: 'Error',
+  
+  // Support chat translations
+  humanSupportChat: "Chat de Soporte Humano",
+  connectWithRealPerson: "Conéctate con una persona real",
+  supportTeamHelp: "Nuestro equipo de soporte está aquí para ayudarte con cualquier pregunta o problema que puedas tener.",
+  status: "Estado:",
+  online247Support: "En línea - Soporte 24/7",
+  backToSupport: "Volver a Soporte",
+};
