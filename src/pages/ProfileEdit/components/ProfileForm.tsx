@@ -51,7 +51,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
       
       <Button 
         type="submit" 
-        className="bg-temu-orange hover:bg-orange-600"
+        className="bg-sisloguin-orange hover:bg-orange-600"
         disabled={isSubmitting}
       >
         {isSubmitting ? t('saving') : t('saveChanges')}

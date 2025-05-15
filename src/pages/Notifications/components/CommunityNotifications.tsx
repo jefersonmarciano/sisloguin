@@ -20,10 +20,10 @@ const CommunityNotifications: React.FC<CommunityNotificationsProps> = ({
   const { t } = useLanguage();
   
   return (
-    <div className="temu-card">
+    <div className="sisloguin-card">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
-          <MessageCircle className="h-5 w-5 text-temu-orange" />
+          <MessageCircle className="h-5 w-5 text-sisloguin-orange" />
           <h2 className="font-medium">{t('communityMessages')}</h2>
         </div>
         
@@ -63,7 +63,7 @@ const CommunityNotifications: React.FC<CommunityNotificationsProps> = ({
                   <div>
                     <div className="flex items-center space-x-2">
                       <h3 className="text-sm font-medium">{notification.user.name}</h3>
-                      <Badge variant="default" className="bg-temu-orange text-[10px]">{t('new')}</Badge>
+                      <Badge variant="default" className="bg-sisloguin-orange text-[10px]">{t('new')}</Badge>
                     </div>
                     <p className="text-xs text-gray-600 mt-1">{notification.text}</p>
                   </div>

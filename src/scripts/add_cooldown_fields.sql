@@ -88,10 +88,19 @@ ON CONFLICT (id) DO UPDATE
 SET public = true;
 
 -- Permitir leitura pública das fotos de perfil
-CREATE POLICY "Public Access" 
-ON storage.objects FOR SELECT 
-USING (bucket_id = 'profile_photos')
-ON CONFLICT DO NOTHING;
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_policies
+        WHERE policyname = 'Public Access'
+        AND tablename = 'objects'
+        AND schemaname = 'storage'
+    ) THEN
+        CREATE POLICY "Public Access" 
+        ON storage.objects FOR SELECT 
+        USING (bucket_id = 'profile_photos');
+    END IF;
+END $$;
 
 -- Permitir que usuários façam upload de suas próprias fotos
 DO $$

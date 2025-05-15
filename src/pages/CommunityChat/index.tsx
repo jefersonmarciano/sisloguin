@@ -121,8 +121,8 @@ const CommunityChat: React.FC = () => {
     >
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <MessageCircle className="h-6 w-6 text-temu-orange mr-2" />
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-temu-orange to-amber-500 bg-clip-text text-transparent">
+          <MessageCircle className="h-6 w-6 text-sisloguin-orange mr-2" />
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-sisloguin-orange to-amber-500 bg-clip-text text-transparent">
             {t('community')}
           </h1>
         </div>
@@ -146,7 +146,7 @@ const CommunityChat: React.FC = () => {
       {isAuthenticated ? (
         <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden mb-20">
           <CardHeader className="bg-gradient-to-r from-amber-50 to-orange-50 pb-4">
-            <CardTitle className="flex items-center gap-2 text-lg font-bold text-temu-orange">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold text-sisloguin-orange">
               <MessageCircle className="h-5 w-5" />
               {t('liveCommunityChat')}
             </CardTitle>
@@ -183,7 +183,7 @@ const CommunityChat: React.FC = () => {
           <CardContent className="p-8 flex flex-col items-center justify-center">
             <div className="text-center space-y-6">
               <div className="mx-auto bg-orange-50 rounded-full p-6 w-24 h-24 flex items-center justify-center">
-                <LogIn className="h-12 w-12 text-temu-orange" />
+                <LogIn className="h-12 w-12 text-sisloguin-orange" />
               </div>
               <h2 className="text-xl font-bold text-gray-800">
                 {t('loginToAccessChat')}
@@ -191,7 +191,7 @@ const CommunityChat: React.FC = () => {
               <p className="text-gray-600 mb-4">
                 {t('pleaseLoginToJoinConversation')}
               </p>
-              <Button asChild className="bg-temu-orange hover:bg-amber-600 text-white px-8 py-2">
+              <Button asChild className="bg-sisloguin-orange hover:bg-amber-600 text-white px-8 py-2">
                 <Link to="/auth">
                   {t('login')}
                 </Link>

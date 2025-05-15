@@ -2,8 +2,8 @@ import { createClient } from '@supabase/supabase-js';
 import type { Database } from '../integrations/supabase/types';
 
 // Public Supabase credentials - safe to expose in browser
-const supabaseUrl = 'https://xqbbsooqjefpqllhutfv.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxYmJzb29xamVmcHFsbGh1dGZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyMzc3MTIsImV4cCI6MjA2MjgxMzcxMn0.2lVLcz-t9pm-yzCUqKOKXU1nVO57seY6MhdLAaoFtwQ';
+const supabaseUrl = 'https://nvavxffqfkvkcozcwjol.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52YXZ4ZmZxZmt2a2NvemN3am9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyODUzNDgsImV4cCI6MjA2MTg2MTM0OH0.V1e25UTdJy127fiVqCSwCjOBHOlBffKkarD5lSXT3L8';
 
 // Função para obter o armazenamento personalizado que evita problemas de cookie
 const getCustomStorage = () => {
@@ -52,7 +52,7 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
     persistSession: true,
     detectSessionInUrl: false,
     storage: getCustomStorage(),
-    storageKey: 'temu-auth-token',
+    storageKey: 'sisloguin-auth-token',
     flowType: 'pkce',
     debug: true
   },

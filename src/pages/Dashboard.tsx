@@ -25,7 +25,7 @@ const activities = [
     id: 1,
     title: 'likeForMoney',
     icon: <Star className="h-5 w-5 text-white" />,
-    color: 'bg-temu-orange',
+    color: 'bg-sisloguin-orange',
     route: '/like-for-money',
   },
   {
@@ -115,7 +115,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="animate-fade-in space-y-6">
       {/* Welcome Section */}
-      <div className="temu-card">
+      <div className="sisloguin-card">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">{t('welcome')}</h1>
         </div>
@@ -126,9 +126,9 @@ const Dashboard: React.FC = () => {
               <span>{t('reviewsCompleted')}</span>
               <span>{user.reviewsCompleted} / {user.reviewsLimit}</span>
             </div>
-            <div className="temu-progress-bar">
+            <div className="sisloguin-progress-bar">
               <div 
-                className="temu-progress-fill" 
+                className="sisloguin-progress-fill" 
                 style={{ width: `${(user.reviewsCompleted / user.reviewsLimit) * 100}%` }}
               ></div>
             </div>
@@ -148,7 +148,7 @@ const Dashboard: React.FC = () => {
       </div>
       
       {/* Daily Tasks Section */}
-      <div className="temu-card">
+      <div className="sisloguin-card">
         <div className="flex justify-between items-center mb-4">
           <h2 className="font-bold text-lg">{t('dailyTasks')}</h2>
           <div className="text-sm text-gray-500">
@@ -183,13 +183,13 @@ const Dashboard: React.FC = () => {
       </div>
       
       {/* Community Section */}
-      <div className="temu-card">
+      <div className="sisloguin-card">
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
-            <Users className="h-5 w-5 text-temu-orange mr-2" />
+            <Users className="h-5 w-5 text-sisloguin-orange mr-2" />
             <h2 className="font-bold text-lg">{t('community')}</h2>
           </div>
-          <Link to="/top100" className="text-temu-orange flex items-center text-sm">
+          <Link to="/top100" className="text-sisloguin-orange flex items-center text-sm">
             {t('top100')}
             <ChevronRight className="h-4 w-4 ml-1" />
           </Link>
@@ -215,7 +215,7 @@ const Dashboard: React.FC = () => {
           ))}
           
           <div className="text-center mt-2">
-            <Link to="/community-chat" className="text-sm text-temu-orange flex justify-center items-center">
+            <Link to="/community-chat" className="text-sm text-sisloguin-orange flex justify-center items-center">
               {t('seeMoreConversations')}
               <ChevronRight className="h-4 w-4 ml-1" />
             </Link>

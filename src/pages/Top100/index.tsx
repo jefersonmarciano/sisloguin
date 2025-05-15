@@ -63,7 +63,7 @@ const Top100: React.FC = () => {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
-          <BarChart className="h-5 w-5 text-temu-orange mr-2" />
+          <BarChart className="h-5 w-5 text-sisloguin-orange mr-2" />
           <h1 className="text-xl font-bold">{t('top100')}</h1>
         </div>
         <div className="text-xs text-gray-500">
@@ -74,7 +74,7 @@ const Top100: React.FC = () => {
       <Card className="mb-4 overflow-hidden">
         <div className="flex justify-between items-center p-4 border-b border-gray-100">
           <h2 className="font-semibold text-base">{t('earnings')} {t('top100')}</h2>
-          <div className="text-temu-orange flex items-center text-xs cursor-pointer">
+          <div className="text-sisloguin-orange flex items-center text-xs cursor-pointer">
             {t('seeDetails')}
             <ChevronRight className="h-3 w-3 ml-1" />
           </div>

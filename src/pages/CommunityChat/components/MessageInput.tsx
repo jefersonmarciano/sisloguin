@@ -61,7 +61,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         </motion.div>
       )}
       
-      <div className={`flex flex-col gap-2 rounded-lg border p-2 transition-all ${isFocused ? 'border-temu-orange shadow-sm' : 'border-gray-200'}`}>
+      <div className={`flex flex-col gap-2 rounded-lg border p-2 transition-all ${isFocused ? 'border-sisloguin-orange shadow-sm' : 'border-gray-200'}`}>
         <Textarea
           ref={textareaRef}
           value={message}
@@ -84,7 +84,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
               type="button" 
               size="icon" 
               variant="ghost" 
-              className="text-gray-500 hover:text-temu-orange rounded-full h-8 w-8"
+              className="text-gray-500 hover:text-sisloguin-orange rounded-full h-8 w-8"
               disabled={!isAuthenticated}
             >
               <Smile className="h-5 w-5" />
@@ -94,7 +94,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
               type="button" 
               size="icon" 
               variant="ghost" 
-              className="text-gray-500 hover:text-temu-orange rounded-full h-8 w-8"
+              className="text-gray-500 hover:text-sisloguin-orange rounded-full h-8 w-8"
               disabled={!isAuthenticated}
             >
               <Paperclip className="h-5 w-5" />
@@ -106,7 +106,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
             <Button 
               onClick={handleSendMessage}
               disabled={!message.trim() || !isAuthenticated}
-              className={`bg-gradient-to-r from-temu-orange to-amber-500 hover:opacity-90 text-white rounded-full px-4 ${(!message.trim() || !isAuthenticated) ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-gradient-to-r from-sisloguin-orange to-amber-500 hover:opacity-90 text-white rounded-full px-4 ${(!message.trim() || !isAuthenticated) ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <Send className="h-4 w-4 mr-1" />
               {t('send')}

@@ -52,7 +52,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
   
   return (
     <div
-      className={`p-3 rounded-lg ${message.isHighlighted ? 'bg-amber-50' : 'bg-gray-50'} ${replying ? 'border-2 border-temu-orange' : ''}`}
+      className={`p-3 rounded-lg ${message.isHighlighted ? 'bg-amber-50' : 'bg-gray-50'} ${replying ? 'border-2 border-sisloguin-orange' : ''}`}
     >
       <div className="flex items-start space-x-2">
         {/* User Avatar - clickable */}
@@ -73,7 +73,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
             {/* User Name - clickable */}
             <div className="flex items-center">
               <span 
-                className="font-medium text-sm mr-2 cursor-pointer hover:text-temu-orange transition-colors" 
+                className="font-medium text-sm mr-2 cursor-pointer hover:text-sisloguin-orange transition-colors" 
                 onClick={onUserClick}
               >
                 {message.user.name}
@@ -96,14 +96,14 @@ const MessageItem: React.FC<MessageItemProps> = ({
               />
               
               <button
-                className="flex items-center text-gray-500 hover:text-temu-orange transition-colors"
+                className="flex items-center text-gray-500 hover:text-sisloguin-orange transition-colors"
                 onClick={onReply}
               >
                 <MessageSquare className="h-4 w-4 mr-1" />
                 {t('reply')}
               </button>
               
-              <button className="flex items-center text-gray-500 hover:text-temu-orange transition-colors">
+              <button className="flex items-center text-gray-500 hover:text-sisloguin-orange transition-colors">
                 <Flag className="h-4 w-4 mr-1" />
                 {t('report')}
               </button>

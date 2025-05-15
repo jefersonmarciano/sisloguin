@@ -16,13 +16,13 @@ const HighlightedMessages: React.FC<HighlightedMessagesProps> = ({
   if (highlightedMessages.length === 0) return null;
   
   return (
-    <div className="temu-card mb-6">
+    <div className="sisloguin-card mb-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold text-lg flex items-center">
           <Star className="h-5 w-5 text-yellow-500 mr-2" />
           Highlighted Messages
         </h2>
-        <a href="#" className="text-temu-orange flex items-center text-sm">
+        <a href="#" className="text-sisloguin-orange flex items-center text-sm">
           See All
           <ChevronRight className="h-4 w-4 ml-1" />
         </a>

@@ -162,7 +162,7 @@ const LuckyWheel: React.FC = () => {
   if (isLoading) {
     return (
       <div className="animate-fade-in max-w-4xl mx-auto p-8 flex justify-center">
-        <div className="animate-spin h-8 w-8 border-4 border-temu-orange border-t-transparent rounded-full"></div>
+        <div className="animate-spin h-8 w-8 border-4 border-sisloguin-orange border-t-transparent rounded-full"></div>
       </div>
     );
   }
@@ -171,11 +171,11 @@ const LuckyWheel: React.FC = () => {
     <div className="animate-fade-in max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <Wallet className="h-6 w-6 text-temu-orange mr-2" />
+          <Wallet className="h-6 w-6 text-sisloguin-orange mr-2" />
           <h1 className="text-2xl font-bold">{t('spinToWin')}</h1>
         </div>
         <div className="flex items-center">
-          <DollarSign className="h-5 w-5 text-temu-orange" />
+          <DollarSign className="h-5 w-5 text-sisloguin-orange" />
           <span className="font-medium">${balance.toFixed(2)}</span>
         </div>
       </div>

@@ -136,7 +136,7 @@ const FallbackPhotoUploader: React.FC = () => {
             src={user.avatar || ''} 
             alt={user.name} 
           />
-          <AvatarFallback className="bg-temu-orange text-white text-2xl">
+          <AvatarFallback className="bg-sisloguin-orange text-white text-2xl">
             {user.name?.charAt(0) || '?'}
           </AvatarFallback>
         </Avatar>
@@ -155,7 +155,7 @@ const FallbackPhotoUploader: React.FC = () => {
             />
             <Button 
               type="submit" 
-              className="rounded-l-none bg-temu-orange hover:bg-orange-600"
+              className="rounded-l-none bg-sisloguin-orange hover:bg-orange-600"
               disabled={isLoading}
             >
               {isLoading ? (

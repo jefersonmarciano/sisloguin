@@ -21,7 +21,7 @@ const ProfileEdit = () => {
         <h1 className="text-xl font-bold">{t('editProfile')}</h1>
       </div>
       
-      <div className="temu-card">
+      <div className="sisloguin-card">
         <ProfileForm
           name={name}
           setName={setName}

@@ -32,13 +32,13 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
           <div className="flex items-center space-x-3">
             <div className="language-selector text-xs flex items-center gap-2">
               <div 
-                className={`px-1 py-0.5 cursor-pointer rounded flex items-center gap-1 ${language === 'en' ? 'bg-temu-orange text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+                className={`px-1 py-0.5 cursor-pointer rounded flex items-center gap-1 ${language === 'en' ? 'bg-sisloguin-orange text-white' : 'text-gray-600 hover:bg-gray-100'}`}
                 onClick={() => setLanguage('en')}
               >
                 <span className="font-bold">🇺🇸</span>
               </div>
               <div 
-                className={`px-1 py-0.5 cursor-pointer rounded flex items-center gap-1 ${language === 'es' ? 'bg-temu-orange text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+                className={`px-1 py-0.5 cursor-pointer rounded flex items-center gap-1 ${language === 'es' ? 'bg-sisloguin-orange text-white' : 'text-gray-600 hover:bg-gray-100'}`}
                 onClick={() => setLanguage('es')}
               >
                 <span className="font-bold">🇪🇸</span>
@@ -48,8 +48,8 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
             {isAuthenticated && user ? (
               <div className="flex items-center space-x-2">
                 {/* Desktop balance display */}
-                <div className="hidden md:flex items-center bg-temu-lightGray px-2 py-1 rounded-full">
-                  <DollarSign className="h-3 w-3 text-temu-orange" />
+                <div className="hidden md:flex items-center bg-sisloguin-lightGray px-2 py-1 rounded-full">
+                  <DollarSign className="h-3 w-3 text-sisloguin-orange" />
                   <span className="text-xs font-medium">${user.balance.toFixed(2)}</span>
                 </div>
                 
@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
                   <DropdownMenuTrigger asChild>
                     <Avatar className="h-7 w-7 cursor-pointer hover:scale-105 transition-transform">
                       <AvatarImage src={user.avatar} alt="User avatar" />
-                      <AvatarFallback className="bg-temu-orange text-white">{user.name.charAt(0)}</AvatarFallback>
+                      <AvatarFallback className="bg-sisloguin-orange text-white">{user.name.charAt(0)}</AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56 z-50 bg-white">
@@ -66,7 +66,7 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
                     <div className="flex items-center px-3 py-2 border-b">
                       <Avatar className="h-10 w-10 mr-2">
                         <AvatarImage src={user.avatar} alt="User avatar" />
-                        <AvatarFallback className="bg-temu-orange text-white">{user.name.charAt(0)}</AvatarFallback>
+                        <AvatarFallback className="bg-sisloguin-orange text-white">{user.name.charAt(0)}</AvatarFallback>
                       </Avatar>
                       <div className="flex flex-col">
                         <span className="text-sm font-medium">{user.name}</span>
@@ -76,7 +76,7 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
                     
                     {/* Mobile balance display */}
                     <div className="flex items-center md:hidden px-3 py-2 text-xs text-gray-700">
-                      <DollarSign className="h-3 w-3 text-temu-orange mr-1" />
+                      <DollarSign className="h-3 w-3 text-sisloguin-orange mr-1" />
                       <span className="font-medium">${user.balance.toFixed(2)}</span>
                     </div>
                     

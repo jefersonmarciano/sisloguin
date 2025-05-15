@@ -40,18 +40,93 @@ BEGIN
         RAISE NOTICE 'Coluna wheel_cooldown_end já existe';
     END IF;
     
-    -- Atualizar os campos de cooldown_end para os registros existentes
-    UPDATE user_progress 
-    SET like_cooldown_end = (last_like_review + INTERVAL '6 hours')
-    WHERE last_like_review IS NOT NULL AND like_cooldown_end IS NULL;
-    
-    UPDATE user_progress 
-    SET inspector_cooldown_end = (last_inspector_review + INTERVAL '6 hours')
-    WHERE last_inspector_review IS NOT NULL AND inspector_cooldown_end IS NULL;
-    
-    UPDATE user_progress 
-    SET wheel_cooldown_end = (last_wheel_spin + INTERVAL '24 hours')
-    WHERE last_wheel_spin IS NOT NULL AND wheel_cooldown_end IS NULL;
-    
-    RAISE NOTICE 'Campos de cooldown_end calculados para registros existentes';
+    -- Verificar quais colunas existem antes de tentar atualizar
+    -- Primeiro verificamos se as colunas de timestamp existem
+    DECLARE
+        last_like_col_exists BOOLEAN;
+        last_inspector_col_exists BOOLEAN;
+        last_wheel_col_exists BOOLEAN;
+    BEGIN
+        SELECT EXISTS (
+            SELECT 1 FROM information_schema.columns 
+            WHERE table_name = 'user_progress' AND column_name = 'last_like_review'
+        ) INTO last_like_col_exists;
+        
+        SELECT EXISTS (
+            SELECT 1 FROM information_schema.columns 
+            WHERE table_name = 'user_progress' AND column_name = 'last_inspector_review'
+        ) INTO last_inspector_col_exists;
+        
+        SELECT EXISTS (
+            SELECT 1 FROM information_schema.columns 
+            WHERE table_name = 'user_progress' AND column_name = 'last_wheel_spin'
+        ) INTO last_wheel_col_exists;
+        
+        -- Atualizar apenas se as colunas existirem
+        IF last_like_col_exists THEN
+            UPDATE user_progress 
+            SET like_cooldown_end = (last_like_review + INTERVAL '6 hours')
+            WHERE last_like_review IS NOT NULL AND like_cooldown_end IS NULL;
+            RAISE NOTICE 'Atualizado like_cooldown_end';
+        ELSE
+            -- Tentar alternativa - verificar outras colunas possíveis
+            SELECT EXISTS (
+                SELECT 1 FROM information_schema.columns 
+                WHERE table_name = 'user_progress' AND column_name = 'last_review_time'
+            ) INTO last_like_col_exists;
+            
+            IF last_like_col_exists THEN
+                UPDATE user_progress 
+                SET like_cooldown_end = (last_review_time + INTERVAL '6 hours')
+                WHERE last_review_time IS NOT NULL AND like_cooldown_end IS NULL;
+                RAISE NOTICE 'Atualizado like_cooldown_end usando last_review_time';
+            ELSE
+                RAISE NOTICE 'Não foi possível atualizar like_cooldown_end (coluna de timestamp não encontrada)';
+            END IF;
+        END IF;
+        
+        IF last_inspector_col_exists THEN
+            UPDATE user_progress 
+            SET inspector_cooldown_end = (last_inspector_review + INTERVAL '6 hours')
+            WHERE last_inspector_review IS NOT NULL AND inspector_cooldown_end IS NULL;
+            RAISE NOTICE 'Atualizado inspector_cooldown_end';
+        ELSE
+            -- Tentar alternativa
+            SELECT EXISTS (
+                SELECT 1 FROM information_schema.columns 
+                WHERE table_name = 'user_progress' AND column_name = 'last_inspector_time'
+            ) INTO last_inspector_col_exists;
+            
+            IF last_inspector_col_exists THEN
+                UPDATE user_progress 
+                SET inspector_cooldown_end = (last_inspector_time + INTERVAL '6 hours')
+                WHERE last_inspector_time IS NOT NULL AND inspector_cooldown_end IS NULL;
+                RAISE NOTICE 'Atualizado inspector_cooldown_end usando last_inspector_time';
+            ELSE
+                RAISE NOTICE 'Não foi possível atualizar inspector_cooldown_end (coluna de timestamp não encontrada)';
+            END IF;
+        END IF;
+        
+        IF last_wheel_col_exists THEN
+            UPDATE user_progress 
+            SET wheel_cooldown_end = (last_wheel_spin + INTERVAL '24 hours')
+            WHERE last_wheel_spin IS NOT NULL AND wheel_cooldown_end IS NULL;
+            RAISE NOTICE 'Atualizado wheel_cooldown_end';
+        ELSE
+            -- Tentar alternativa
+            SELECT EXISTS (
+                SELECT 1 FROM information_schema.columns 
+                WHERE table_name = 'user_progress' AND column_name = 'last_wheel_time'
+            ) INTO last_wheel_col_exists;
+            
+            IF last_wheel_col_exists THEN
+                UPDATE user_progress 
+                SET wheel_cooldown_end = (last_wheel_time + INTERVAL '24 hours')
+                WHERE last_wheel_time IS NOT NULL AND wheel_cooldown_end IS NULL;
+                RAISE NOTICE 'Atualizado wheel_cooldown_end usando last_wheel_time';
+            ELSE
+                RAISE NOTICE 'Não foi possível atualizar wheel_cooldown_end (coluna de timestamp não encontrada)';
+            END IF;
+        END IF;
+    END;
 END $$; 

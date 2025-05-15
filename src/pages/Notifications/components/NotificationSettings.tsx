@@ -23,9 +23,9 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   const { t } = useLanguage();
   
   return (
-    <div className="temu-card">
+    <div className="sisloguin-card">
       <div className="flex items-center space-x-2 mb-4">
-        <Settings className="h-5 w-5 text-temu-orange" />
+        <Settings className="h-5 w-5 text-sisloguin-orange" />
         <h2 className="font-medium">{t('notificationSettings')}</h2>
       </div>
       
@@ -53,7 +53,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
         </div>
         
         <div className="border-t pt-4">
-          <Button onClick={onSaveSettings} className="bg-temu-orange hover:bg-orange-600 text-sm">
+          <Button onClick={onSaveSettings} className="bg-sisloguin-orange hover:bg-orange-600 text-sm">
             {t('savePreferences')}
           </Button>
         </div>

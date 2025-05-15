@@ -99,7 +99,7 @@ const PhotoUploader: React.FC<PhotoUploaderProps> = ({
                 onError={handleImageError}
               />
             )}
-            <AvatarFallback className="bg-temu-orange text-white text-xl">
+            <AvatarFallback className="bg-sisloguin-orange text-white text-xl">
               {userName?.charAt(0) || '?'}
             </AvatarFallback>
           </Avatar>

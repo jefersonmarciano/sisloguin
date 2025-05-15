@@ -25,7 +25,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         <Button 
           onClick={handleSpin}
           disabled={isSpinning || wheelsRemaining <= 0}
-          className={`py-3 px-10 bg-temu-orange hover:bg-temu-orange/90 text-white rounded-lg text-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-temu-orange focus:ring-offset-2 ${isSpinning ? 'animate-pulse' : ''} ${(isSpinning || wheelsRemaining <= 0) ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`py-3 px-10 bg-sisloguin-orange hover:bg-sisloguin-orange/90 text-white rounded-lg text-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-sisloguin-orange focus:ring-offset-2 ${isSpinning ? 'animate-pulse' : ''} ${(isSpinning || wheelsRemaining <= 0) ? 'opacity-50 cursor-not-allowed' : ''}`}
           aria-label={isSpinning ? t('wheelSpinning') : t('wheelSpinToPrizes')}
         >
           {isSpinning ? t('spinning') : t('spin')}

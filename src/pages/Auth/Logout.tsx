@@ -78,7 +78,7 @@ const LogoutPage: React.FC = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md text-center">
         <h1 className="text-2xl font-bold mb-4">Saindo...</h1>
         <div className="mb-4">
-          <div className="w-8 h-8 border-4 border-temu-orange border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+          <div className="w-8 h-8 border-4 border-sisloguin-orange border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
           <p className="text-gray-600">{logoutStatus}</p>
         </div>
       </div>

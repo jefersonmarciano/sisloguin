@@ -1,4 +1,3 @@
-
 import { User } from '@/types/auth';
 import { supabase } from '@/lib/supabase';
 
@@ -87,14 +86,14 @@ export const updateUserProfileData = async (
     }
     
     // Update the localStorage
-    const currentUser = localStorage.getItem('temuUser');
+    const currentUser = localStorage.getItem('sisloguinUser');
     if (currentUser) {
       const userObject = JSON.parse(currentUser);
       const updatedUser = {
         ...userObject,
         ...updates
       };
-      localStorage.setItem('temuUser', JSON.stringify(updatedUser));
+      localStorage.setItem('sisloguinUser', JSON.stringify(updatedUser));
       console.log("User data updated in localStorage");
     }
     

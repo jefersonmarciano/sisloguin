@@ -49,7 +49,7 @@ const ProductInspectionForm: React.FC<ProductInspectionFormProps> = ({
       {/* Title second */}
       <div className="text-center w-full">
         <h2 className="font-bold text-xl">{product.name}</h2>
-        <div className="text-sm font-medium bg-temu-lightGray px-3 py-1 rounded-full inline-block mt-2">
+        <div className="text-sm font-medium bg-sisloguin-lightGray px-3 py-1 rounded-full inline-block mt-2">
           ${product.price.toFixed(2)}
         </div>
       </div>
@@ -64,7 +64,7 @@ const ProductInspectionForm: React.FC<ProductInspectionFormProps> = ({
       <div className="space-y-3 w-full max-w-md">
         <p className="font-medium text-center">{product.question || t('safetyQuestion')}</p>
         <textarea
-          className={`w-full h-32 p-2 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:ring-temu-orange focus:border-transparent`}
+          className={`w-full h-32 p-2 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:ring-sisloguin-orange focus:border-transparent`}
           placeholder={t('enterSafetyConcerns')}
           value={concerns}
           onChange={(e) => setConcerns(e.target.value)}
@@ -84,13 +84,13 @@ const ProductInspectionForm: React.FC<ProductInspectionFormProps> = ({
       <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} gap-3 w-full max-w-md`}>
         <button 
           onClick={() => validateAndSubmit(onSafe)}
-          className={`temu-button ${isMobile ? 'w-full' : 'flex-1'} bg-green-500 hover:bg-green-600 font-mono font-semibold tracking-wide`}
+          className={`sisloguin-button ${isMobile ? 'w-full' : 'flex-1'} bg-green-500 hover:bg-green-600 font-mono font-semibold tracking-wide`}
         >
           {t('safe')}
         </button>
         <button 
           onClick={() => validateAndSubmit(onRequiresAttention)}
-          className={`temu-button ${isMobile ? 'w-full' : 'flex-1'} bg-amber-500 hover:bg-amber-600 font-mono font-semibold tracking-wide`}
+          className={`sisloguin-button ${isMobile ? 'w-full' : 'flex-1'} bg-amber-500 hover:bg-amber-600 font-mono font-semibold tracking-wide`}
         >
           {t('requiresAttention')}
         </button>

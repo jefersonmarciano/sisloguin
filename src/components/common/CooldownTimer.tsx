@@ -339,8 +339,8 @@ const CooldownTimer: React.FC<CooldownTimerProps> = ({
       default:
         return {
           bg: 'bg-orange-100',
-          text: 'text-temu-orange',
-          progress: 'bg-temu-orange'
+          text: 'text-sisloguin-orange',
+          progress: 'bg-sisloguin-orange'
         };
     }
   };

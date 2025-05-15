@@ -41,7 +41,7 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
         {/* Product information */}
         <div className="text-center w-full">
           <h2 className="font-bold text-xl">{product.name}</h2>
-          <p className="text-2xl font-medium text-temu-orange mt-2">${product.price.toFixed(2)}</p>
+          <p className="text-2xl font-medium text-sisloguin-orange mt-2">${product.price.toFixed(2)}</p>
         </div>
         
         {/* Product description */}
@@ -56,7 +56,7 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
           {/* Timer indicator */}
           <div className="w-full bg-gray-200 h-2 rounded-full mb-4">
             <div 
-              className="bg-temu-orange h-full rounded-full transition-all duration-1000"
+              className="bg-sisloguin-orange h-full rounded-full transition-all duration-1000"
               style={{ width: `${(timeRemaining / 30) * 100}%` }}
             />
           </div>

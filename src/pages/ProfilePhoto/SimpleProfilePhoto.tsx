@@ -242,7 +242,7 @@ const SimpleProfilePhoto = () => {
               src={previewImage || user.avatar} 
               alt={user.name} 
             />
-            <AvatarFallback className="bg-temu-orange text-white text-2xl">
+            <AvatarFallback className="bg-sisloguin-orange text-white text-2xl">
               {user.name?.charAt(0) || '?'}
             </AvatarFallback>
           </Avatar>

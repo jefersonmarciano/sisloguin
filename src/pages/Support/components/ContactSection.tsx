@@ -32,7 +32,7 @@ const ContactSection: React.FC = () => {
           <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full human-support-badge">
             Human Support
           </div>
-          <CardHeader className="bg-gradient-to-r from-temu-orange to-orange-500 text-white rounded-t-lg">
+          <CardHeader className="bg-gradient-to-r from-sisloguin-orange to-orange-500 text-white rounded-t-lg">
             <CardTitle className="flex items-center">
               <MessageCircle className="h-6 w-6 mr-2" />
               {t('liveChat')}
@@ -53,7 +53,7 @@ const ContactSection: React.FC = () => {
           <CardFooter>
             <Button 
               onClick={navigateToChatSupport}
-              className="w-full bg-temu-orange hover:bg-orange-600"
+              className="w-full bg-sisloguin-orange hover:bg-orange-600"
             >
               <MessageCircle className="h-5 w-5 mr-2" />
               {t('startChat')}

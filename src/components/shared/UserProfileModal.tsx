@@ -79,7 +79,7 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ user, open, onClose
             </div>
             <div>
               <div className="text-gray-500">{t('earnings')}</div>
-              <div className="font-medium text-temu-orange">
+              <div className="font-medium text-sisloguin-orange">
                 ${user.earnings.toLocaleString(language === 'en' ? 'en-US' : 'es-ES', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2

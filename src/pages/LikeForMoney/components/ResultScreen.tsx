@@ -42,7 +42,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({
          "No problem, we'll show you another product."}
       </p>
       
-      <div className="bg-gradient-to-r from-temu-orange/10 to-amber-500/10 p-4 rounded-lg w-full max-w-xs mb-6">
+      <div className="bg-gradient-to-r from-sisloguin-orange/10 to-amber-500/10 p-4 rounded-lg w-full max-w-xs mb-6">
         <div className="flex justify-between items-center">
           <span className="text-gray-700">You earned:</span>
           <span className="text-xl font-bold text-green-600">
@@ -53,7 +53,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({
       
       <button 
         onClick={onContinue}
-        className="px-6 py-2 bg-gradient-to-r from-temu-orange to-amber-500 text-white rounded-lg shadow hover:shadow-lg transition-all duration-300"
+        className="px-6 py-2 bg-gradient-to-r from-sisloguin-orange to-amber-500 text-white rounded-lg shadow hover:shadow-lg transition-all duration-300"
       >
         Continue
       </button>

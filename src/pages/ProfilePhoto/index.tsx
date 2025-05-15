@@ -103,7 +103,7 @@ const ProfilePhoto = () => {
         <h1 className="text-xl font-bold" onClick={handleDebugClick}>{t('changeProfilePhoto')}</h1>
       </div>
       
-      <div className="temu-card">
+      <div className="sisloguin-card">
         <div className="flex flex-col items-center justify-center space-y-4">
           <PhotoUploader
             avatar={user?.avatar}
@@ -120,7 +120,7 @@ const ProfilePhoto = () => {
           </div>
           
           {isUploading && (
-            <div className="flex items-center text-temu-orange">
+            <div className="flex items-center text-sisloguin-orange">
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
               <span className="text-sm">
                 {uploadElapsed < 10 
@@ -133,7 +133,7 @@ const ProfilePhoto = () => {
           <div className="flex space-x-2">
             <Button 
               onClick={handleSavePhoto} 
-              className="bg-temu-orange hover:bg-orange-600"
+              className="bg-sisloguin-orange hover:bg-orange-600"
               disabled={previewImage === null || isUploading}
             >
               {isUploading ? (
@@ -165,7 +165,7 @@ const ProfilePhoto = () => {
 
       {/* Ferramentas de diagnóstico */}
       {showDebug && (
-        <div className="temu-card border-orange-200">
+        <div className="sisloguin-card border-orange-200">
           <h3 className="text-md font-semibold text-orange-700 mb-2">Ferramentas de Diagnóstico</h3>
           <p className="text-sm text-gray-600 mb-4">
             Use estas ferramentas para diagnosticar problemas com o upload de fotos.

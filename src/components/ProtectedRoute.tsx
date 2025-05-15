@@ -11,7 +11,7 @@ const ProtectedRoute: React.FC = () => {
   if (isInitializing) {
     return (
       <div className="flex items-center justify-center h-[80vh]">
-        <Loader2 className="h-8 w-8 animate-spin text-temu-orange" />
+        <Loader2 className="h-8 w-8 animate-spin text-sisloguin-orange" />
       </div>
     );
   }

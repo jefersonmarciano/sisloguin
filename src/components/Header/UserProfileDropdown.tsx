@@ -16,7 +16,7 @@ const UserProfileDropdown: React.FC = () => {
       <DropdownMenuTrigger asChild>
         <Avatar className="h-7 w-7 cursor-pointer hover:scale-105 transition-transform">
           <AvatarImage src={user.avatar} alt="User avatar" />
-          <AvatarFallback className="bg-temu-orange text-white">{user.name.charAt(0)}</AvatarFallback>
+          <AvatarFallback className="bg-sisloguin-orange text-white">{user.name.charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 z-50 bg-white">
