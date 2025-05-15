@@ -9,10 +9,10 @@ BEGIN
         WHERE tablename = 'user_progress' 
         AND policyname = 'Users can read their own progress'
     ) THEN
-        CREATE POLICY "Users can read their own progress" 
-        ON user_progress 
-        FOR SELECT 
-        USING (auth.uid() = user_id);
+CREATE POLICY "Users can read their own progress" 
+ON user_progress 
+FOR SELECT 
+USING (auth.uid() = user_id);
         
         RAISE NOTICE 'Política de leitura criada com sucesso';
     ELSE
@@ -28,10 +28,10 @@ BEGIN
         WHERE tablename = 'user_progress' 
         AND policyname = 'Users can update their own progress'
     ) THEN
-        CREATE POLICY "Users can update their own progress" 
-        ON user_progress 
-        FOR UPDATE 
-        USING (auth.uid() = user_id);
+CREATE POLICY "Users can update their own progress" 
+ON user_progress 
+FOR UPDATE 
+USING (auth.uid() = user_id);
         
         RAISE NOTICE 'Política de atualização criada com sucesso';
     ELSE
@@ -47,10 +47,10 @@ BEGIN
         WHERE tablename = 'user_progress' 
         AND policyname = 'Users can insert their own progress'
     ) THEN
-        CREATE POLICY "Users can insert their own progress" 
-        ON user_progress 
-        FOR INSERT 
-        WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can insert their own progress" 
+ON user_progress 
+FOR INSERT 
+WITH CHECK (auth.uid() = user_id);
         
         RAISE NOTICE 'Política de inserção criada com sucesso';
     ELSE

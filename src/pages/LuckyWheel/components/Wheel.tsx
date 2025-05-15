@@ -77,7 +77,7 @@ const Wheel: React.FC<WheelProps> = ({ segments, spinDegrees, isSpinning }) => {
       </div>
       {/* Center button - Fixed to be properly centered */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-md z-10 border-2 border-[#f97316]">
-        <span className="font-bold text-[#f97316] text-xl tracking-wider">TEMU</span>
+        <span className="font-bold text-[#f97316] text-sm tracking-wider">SISLOGUIN</span>
       </div>
     </div>
   );

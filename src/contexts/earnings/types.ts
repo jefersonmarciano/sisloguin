@@ -1,4 +1,3 @@
-
 import { User } from '@/types/auth';
 
 export interface Transaction {
@@ -7,6 +6,7 @@ export interface Transaction {
   amount: number;
   type: 'review' | 'wheel' | 'inspector' | 'withdraw' | 'like';
   status: 'completed' | 'pending' | 'failed';
+  created_at?: string;
 }
 
 export interface EarningsContextType {

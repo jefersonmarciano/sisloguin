@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useMemo } from 'react';
 import { useToast } from '../../../hooks/use-toast';
 import { useAuth } from '../../../contexts/AuthContext';
@@ -19,15 +18,15 @@ export const useWheelSpin = () => {
   const [currentPrize, setCurrentPrize] = useState<number | null>(null);
   const [wheelResults, setWheelResults] = useState<number[]>([]);
   
-  // Wheel segments with updated higher values (3-7 dollars and one $100 prize)
+  // Wheel segments with updated values (1.5-3.5 dollars and one $50 prize)
   const segments: WheelSegment[] = useMemo(() => [
-    { value: 3.00, color: '#f97316', label: '$3.00' },
-    { value: 5.00, color: '#3498db', label: '$5.00' },
-    { value: 4.00, color: '#2ecc71', label: '$4.00' },
+    { value: 1.50, color: '#f97316', label: '$1.50' },
+    { value: 2.50, color: '#3498db', label: '$2.50' },
+    { value: 2.00, color: '#2ecc71', label: '$2.00' },
     { value: 0.00, color: '#374151', label: t('tryAgain') },
-    { value: 7.00, color: '#9b59b6', label: '$7.00' },
-    { value: 100.00, color: '#e67e22', label: '$100.00' },
-    { value: 6.00, color: '#f39c12', label: '$6.00' },
+    { value: 3.50, color: '#9b59b6', label: '$3.50' },
+    { value: 50.00, color: '#e67e22', label: '$50.00' },
+    { value: 3.00, color: '#f39c12', label: '$3.00' },
     { value: 0.00, color: '#374151', label: t('tryAgain') },
   ], [t]);
   
@@ -81,10 +80,10 @@ export const useWheelSpin = () => {
       // Trigger confetti for non-zero prizes
       if (prize > 0) {
         confetti({
-          particleCount: prize >= 100 ? 200 : 100,
+          particleCount: prize >= 50 ? 200 : 100,
           spread: 70,
           origin: { y: 0.6 },
-          colors: prize >= 100 ? ['#FFD700', '#f97316', '#FFDF00'] : undefined
+          colors: prize >= 50 ? ['#FFD700', '#f97316', '#FFDF00'] : undefined
         });
       }
       

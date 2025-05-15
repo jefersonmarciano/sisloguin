@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useEarnings } from '../../contexts/EarningsContext';
 import { useAuth } from '../../contexts/AuthContext';
-import { Wallet, DollarSign } from 'lucide-react';
+import { Wallet, DollarSign, TrendingUp } from 'lucide-react';
 import { useWheelSpin } from './hooks/useWheelSpin';
 import { supabase } from '@/lib/supabase';
 import Wheel from './components/Wheel';
@@ -16,7 +16,7 @@ import SpinSessionSummary from './components/SpinSessionSummary';
 const LuckyWheel: React.FC = () => {
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { transactions } = useEarnings();
+  const { transactions, getEarningsByType } = useEarnings();
   
   const [showCooldown, setShowCooldown] = useState(false);
   const [showSessionSummary, setShowSessionSummary] = useState(false);
@@ -35,6 +35,11 @@ const LuckyWheel: React.FC = () => {
       )
       .reduce((sum, t) => sum + t.amount, 0);
   }, [transactions, today]);
+  
+  // Calculate total wheel earnings
+  const totalWheelEarnings = useMemo(() => {
+    return getEarningsByType('wheel');
+  }, [getEarningsByType]);
   
   const balance = user?.balance || 0;
   const wheelsRemaining = user?.wheelsRemaining || 0;
@@ -169,6 +174,17 @@ const LuckyWheel: React.FC = () => {
 
   return (
     <div className="animate-fade-in max-w-4xl mx-auto">
+      {/* Total Earnings Banner */}
+      <div className="bg-gradient-to-r from-sisloguin-orange to-orange-500 text-white p-4 rounded-lg mb-6 shadow-md">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <TrendingUp className="h-6 w-6 mr-2" />
+            <h2 className="text-xl font-bold">{t('totalEarnings')}</h2>
+          </div>
+          <div className="text-2xl font-bold">${totalWheelEarnings.toFixed(2)}</div>
+        </div>
+      </div>
+      
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
           <Wallet className="h-6 w-6 text-sisloguin-orange mr-2" />

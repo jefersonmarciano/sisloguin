@@ -46,9 +46,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Custom Logout that redirects to the logout page
   const customLogout = useCallback(async () => {
-    // Não alterar estados aqui - apenas redirecionar
-    window.location.href = '/logout';
-    // Retorna uma Promise para satisfazer a assinatura do método
+    // Start clearing some key localStorage items immediately for faster logout
+    try {
+      // Clear basic localStorage items right away
+      localStorage.removeItem('sisloguinUser');
+      localStorage.removeItem('temuUser');
+    } catch (e) {
+      console.error('Error clearing user cache:', e);
+    }
+    
+    // Redirect to logout page, which will handle the rest of the process
+    window.location.replace('/logout');
+    
+    // Return a resolved promise to satisfy the method signature
     return Promise.resolve();
   }, []);
 

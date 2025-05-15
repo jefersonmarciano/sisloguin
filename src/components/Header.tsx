@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useEarnings } from '../contexts/EarningsContext';
 import { DollarSign, UserRound, Settings, Bell, LogOut, Image, Edit } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
@@ -16,6 +17,10 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => {
   const { language, setLanguage, t } = useLanguage();
   const { user, isAuthenticated, logout } = useAuth();
+  const { getEarningsByType } = useEarnings();
+  
+  // Get the total wheel earnings
+  const totalWheelEarnings = getEarningsByType('wheel');
   
   return (
     <header className="bg-white bg-opacity-95 backdrop-blur-sm shadow-sm sticky top-0 z-10 transition-all duration-300">
@@ -50,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
                 {/* Desktop balance display */}
                 <div className="hidden md:flex items-center bg-sisloguin-lightGray px-2 py-1 rounded-full">
                   <DollarSign className="h-3 w-3 text-sisloguin-orange" />
-                  <span className="text-xs font-medium">${user.balance.toFixed(2)}</span>
+                  <span className="text-xs font-medium">${totalWheelEarnings.toFixed(2)}</span>
                 </div>
                 
                 {/* Avatar and enhanced dropdown menu */}
@@ -77,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
                     {/* Mobile balance display */}
                     <div className="flex items-center md:hidden px-3 py-2 text-xs text-gray-700">
                       <DollarSign className="h-3 w-3 text-sisloguin-orange mr-1" />
-                      <span className="font-medium">${user.balance.toFixed(2)}</span>
+                      <span className="font-medium">${totalWheelEarnings.toFixed(2)}</span>
                     </div>
                     
                     <DropdownMenuSeparator />

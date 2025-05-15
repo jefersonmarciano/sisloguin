@@ -1,4 +1,3 @@
-
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 
 export interface User {
@@ -16,6 +15,8 @@ export interface User {
   lastReviewDate: Date | null;
   wheelsRemaining: number;
   lastReviewReset: Date | null;
+  wheelCooldownEnd?: Date | null;
+  lastWheelSpin?: Date | null;
 }
 
 export type ExtendedUser = SupabaseUser & {
@@ -28,6 +29,8 @@ export type ExtendedUser = SupabaseUser & {
   wheelsRemaining?: number;
   avatar?: string;
   lastReviewReset?: Date | null;
+  wheel_cooldown_end?: string | null;
+  last_wheel_spin?: string | null;
 };
 
 export type AuthResponse = {

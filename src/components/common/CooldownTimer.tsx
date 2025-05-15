@@ -86,7 +86,7 @@ const CooldownTimer: React.FC<CooldownTimerProps> = ({
           setTimeLeft({ hours, minutes, seconds });
         }, 1000);
       }
-    }, 5000); // 5 segundos são suficientes para timeout
+    }, 3000); // Reduced from 5 seconds to 3 seconds for faster failover
     
     const initializeTimer = async () => {
       try {
@@ -304,6 +304,15 @@ const CooldownTimer: React.FC<CooldownTimerProps> = ({
               source: 'error'
             }));
           }
+          
+          // If there's a critical error, call the onComplete callback
+          // This ensures we don't leave the user stuck with a broken timer
+          setTimeout(() => {
+            if (isMounted) {
+              console.log("Error recovery: Completing cooldown timer");
+              onComplete();
+            }
+          }, 5000);
         }
       }
     };

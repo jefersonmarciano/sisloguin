@@ -1,33 +1,41 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { toast } from '@/components/ui/use-toast';
-import { supabase } from '@/lib/supabase';
 
 interface LogoutButtonProps extends ButtonProps {
-  redirectTo?: string;
   showIcon?: boolean;
   text?: string;
 }
 
 export const LogoutButton: React.FC<LogoutButtonProps> = ({
-  redirectTo = '/auth',
   showIcon = true,
   text = 'Logout',
   ...props
 }) => {
-  const navigate = useNavigate();
   const { logout } = useAuth();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const handleLogout = (e: React.MouseEvent) => {
+  const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    console.log("Navegando para página de logout...");
-    navigate('/logout');
+    setIsLoggingOut(true);
+    
+    try {
+      // Start clearing local storage right away
+      localStorage.removeItem('sisloguinUser');
+      localStorage.removeItem('temuUser');
+      
+      console.log("Iniciando processo de logout...");
+      
+      // Use window.location.replace for a more reliable redirect
+      // that won't get caught in React Router history
+      window.location.replace('/logout');
+    } catch (error) {
+      console.error("Erro ao iniciar logout:", error);
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -40,7 +48,7 @@ export const LogoutButton: React.FC<LogoutButtonProps> = ({
       {...props}
     >
       {showIcon && <LogOut className="mr-2 h-4 w-4" />}
-      {isLoggingOut ? 'Logging out...' : text}
+      {isLoggingOut ? 'Saindo...' : text}
     </Button>
   );
 };

@@ -15,7 +15,25 @@ export const useAuthInitialization = () => {
   const timeoutRef = useRef<number | null>(null);
   
   // Use our custom hook for localStorage instead of direct manipulation
-  const [cachedUser, setCachedUser] = useLocalStorage<User | null>('temuUser', null);
+  const [cachedUser, setCachedUser] = useLocalStorage<User | null>('sisloguinUser', null);
+
+  // Check for old data in 'temuUser' if no data in 'sisloguinUser'
+  useEffect(() => {
+    if (!cachedUser) {
+      try {
+        const oldUserData = localStorage.getItem('temuUser');
+        if (oldUserData) {
+          console.log('Found old temu user data, migrating to sisloguinUser');
+          const oldUser = JSON.parse(oldUserData);
+          setCachedUser(oldUser);
+          // Remove old data
+          localStorage.removeItem('temuUser');
+        }
+      } catch (e) {
+        console.error('Error migrating temu user data:', e);
+      }
+    }
+  }, [cachedUser, setCachedUser]);
 
   // Update user state with persistence
   const updateUser = useCallback((userData: User | null) => {

@@ -41,7 +41,7 @@ const SpinSessionSummary: React.FC<SpinSessionSummaryProps> = ({ results, onCont
           <span className="font-medium text-gray-700">Total Won:</span>
           <span className="text-xl font-bold text-green-600 flex items-center gap-2">
             ${totalWon.toFixed(2)}
-            {totalWon > 20 && <Sparkles className="h-5 w-5 text-yellow-500" />}
+            {totalWon > 10 && <Sparkles className="h-5 w-5 text-yellow-500" />}
           </span>
         </div>
         
