@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useEarnings } from '../../contexts/EarningsContext';
 import { useAuth } from '../../contexts/AuthContext';
@@ -32,7 +31,7 @@ const Earnings: React.FC = () => {
   const currentBalance = totalEarnings;
   
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in bg-gray-800/50 text-gray-100">
       <EarningsHeader />
       
       <EarningsSummaryCards 

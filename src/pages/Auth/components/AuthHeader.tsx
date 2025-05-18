@@ -9,8 +9,8 @@ export const AuthHeader: React.FC = () => {
     <div className="flex justify-center mb-8">
       <div className="text-center">
         <div className="flex items-center justify-center">
-          <img 
-            src="https://centermoneyguard.com/upload/logo.png" 
+        <img 
+            src="/logo.png" 
             alt="App Profit Logo" 
             className="h-28 brightness-90 contrast-125" 
           />
