@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -55,7 +54,7 @@ const Notifications = () => {
   }
 
   return (
-    <div className="animate-fade-in space-y-6">
+    <div className="animate-fade-in space-y-6 bg-gray-800/50 text-gray-100 p-4 rounded-xl">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">{t('notifications')}</h1>
       </div>

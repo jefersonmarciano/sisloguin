@@ -41,6 +41,12 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
               >
                 <span className="font-bold">🇪🇸</span>
               </div>
+              <div 
+                className={`px-1 py-0.5 cursor-pointer rounded flex items-center gap-1 ${language === 'fr' ? 'bg-temu-orange text-white' : 'text-gray-300 hover:bg-gray-800'}`}
+                onClick={() => setLanguage('fr')}
+              >
+                <span className="font-bold">🇫🇷</span>
+              </div>
             </div>
             
             {isAuthenticated && user ? (

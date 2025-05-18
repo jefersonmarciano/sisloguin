@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { Badge } from '@/components/ui/badge';
@@ -20,7 +19,7 @@ const CommunityNotifications: React.FC<CommunityNotificationsProps> = ({
   const { t } = useLanguage();
   
   return (
-    <div className="temu-card">
+    <div className="temu-card bg-gray-800/50 border border-gray-700 rounded-xl text-gray-100">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <MessageCircle className="h-5 w-5 text-temu-orange" />
@@ -31,7 +30,7 @@ const CommunityNotifications: React.FC<CommunityNotificationsProps> = ({
           <Button 
             variant="outline" 
             size="sm" 
-            className="text-red-500 border-red-200 hover:bg-red-50"
+            className="bg-gray-700 text-gray-100 border-gray-600 hover:bg-gray-600"
             onClick={onClearClick}
           >
             <Trash2 className="h-4 w-4 mr-1" /> {t('clear')}
@@ -40,18 +39,16 @@ const CommunityNotifications: React.FC<CommunityNotificationsProps> = ({
       </div>
       
       {notificationHistory.length === 0 ? (
-        <Alert>
-          <AlertTitle>{t('noCommunityMessages')}</AlertTitle>
-          <AlertDescription>
-            {t('newMessagesWillAppearHere')}
-          </AlertDescription>
-        </Alert>
+        <div className="bg-gray-700 p-4 rounded-xl text-gray-100">
+          <h3 className="font-medium">{t('noCommunityMessages')}</h3>
+          <p className="text-gray-400">{t('newMessagesWillAppearHere')}</p>
+        </div>
       ) : (
         <div className="space-y-4">
           {notificationHistory.map((notification) => (
             <div 
               key={notification.id} 
-              className="p-3 rounded-lg bg-blue-50"
+              className="p-3 rounded-lg bg-gray-700"
             >
               <div className="flex justify-between items-start">
                 <div className="flex gap-2">
@@ -62,13 +59,13 @@ const CommunityNotifications: React.FC<CommunityNotificationsProps> = ({
                   />
                   <div>
                     <div className="flex items-center space-x-2">
-                      <h3 className="text-sm font-medium">{notification.user.name}</h3>
+                      <h3 className="text-sm font-medium text-gray-100">{notification.user.name}</h3>
                       <Badge variant="default" className="bg-temu-orange text-[10px]">{t('new')}</Badge>
                     </div>
-                    <p className="text-xs text-gray-600 mt-1">{notification.text}</p>
+                    <p className="text-xs text-gray-400 mt-1">{notification.text}</p>
                   </div>
                 </div>
-                <span className="text-[10px] text-gray-500">{formatTimestamp(notification.timestamp)}</span>
+                <span className="text-[10px] text-gray-400">{formatTimestamp(notification.timestamp)}</span>
               </div>
             </div>
           ))}

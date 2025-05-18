@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { Camera, X } from 'lucide-react';
@@ -100,15 +99,15 @@ const PhotoUploader: React.FC<PhotoUploaderProps> = ({
       />
       
       <div 
-        className="border-2 border-dashed border-gray-300 rounded-lg p-8 w-full cursor-pointer hover:bg-gray-50 text-center transition-colors" 
+        className="border-2 border-dashed border-gray-700 rounded-lg p-8 w-full cursor-pointer bg-gray-800/50 hover:bg-gray-700 text-center transition-colors" 
         onClick={triggerFileInput}
       >
         <div className="flex flex-col items-center justify-center space-y-2">
-          <div className="bg-gray-100 p-3 rounded-full">
-            <Camera className="h-6 w-6 text-gray-500" />
+          <div className="bg-gray-700 p-3 rounded-full">
+            <Camera className="h-6 w-6 text-gray-300" />
           </div>
-          <p className="text-sm font-medium">{t('uploadNewPhoto')}</p>
-          <p className="text-xs text-gray-500">{t('jpgPngGif')}</p>
+          <p className="text-sm font-medium text-gray-100">{t('uploadNewPhoto')}</p>
+          <p className="text-xs text-gray-400">{t('jpgPngGif')}</p>
         </div>
       </div>
     </>

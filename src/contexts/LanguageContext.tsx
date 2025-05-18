@@ -1,10 +1,9 @@
-
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import translations from '../translations';
 import { Language, LanguageContextType } from '../types/language';
 
 // Define available languages
-const languages: Language[] = ['en', 'es'];
+const languages: Language[] = ['en', 'es', 'fr'];
 
 // Create context with default value undefined
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
