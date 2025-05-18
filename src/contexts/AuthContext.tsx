@@ -1,10 +1,11 @@
-import React, { createContext, useContext, ReactNode, useEffect, useCallback } from 'react';
-import { useAuthState } from '../hooks/auth-state';
-import { useAuthMethods } from '../hooks/auth-methods';
+
+import React, { createContext, useContext, ReactNode, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useAuthState } from '../hooks/useAuthState';
+import { useAuthMethods } from '../hooks/useAuthMethods';
 import { User, AuthContextType } from '../types/auth';
 
-// Export the AuthContext directly so it can be imported without causing circular dependencies
-export const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Use hook for Supabase auth state
@@ -21,7 +22,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     login,
     register,
     logout,
-    resetPassword,
     updateBalance,
     completeReview,
     checkAndResetReviews,
@@ -33,63 +33,38 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Check and reset reviews on component mount and when user changes
   useEffect(() => {
-    // Always define the effect function, but conditionally execute logic inside
-    const checkReviews = () => {
-      if (user) {
-        checkAndResetReviews();
-      }
-    };
-    
-    checkReviews();
-    // Include checkAndResetReviews in dependencies to avoid lint warnings
-  }, [user, checkAndResetReviews]);
-
-  // Custom Logout that redirects to the logout page
-  const customLogout = useCallback(async () => {
-    // Start clearing some key localStorage items immediately for faster logout
-    try {
-      // Clear basic localStorage items right away
-      localStorage.removeItem('sisloguinUser');
-      localStorage.removeItem('temuUser');
-    } catch (e) {
-      console.error('Error clearing user cache:', e);
+    if (user) {
+      console.log('[AuthContext] User authenticated, checking daily reset');
+      checkAndResetReviews();
     }
-    
-    // Redirect to logout page, which will handle the rest of the process
-    window.location.replace('/logout');
-    
-    // Return a resolved promise to satisfy the method signature
-    return Promise.resolve();
-  }, []);
+  }, [user]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        isAuthenticated,
-        isInitializing,
-        login: login,
-        signup: register,
-        logout: customLogout,
-        resetPassword: resetPassword,
-        updateBalance: updateBalance,
-        completeReview: completeReview,
-        checkAndResetReviews: checkAndResetReviews,
-        useWheel: useWheel,
-        updateUserAvatar: updateUserAvatar,
-        updateUserProfile: updateUserProfile,
-        changePassword: changePassword
-      }}
-    >
+    <AuthContext.Provider value={{
+      user,
+      setUser,
+      isAuthenticated,
+      setIsAuthenticated,
+      isInitializing,
+      login,
+      register,
+      logout,
+      updateBalance,
+      completeReview,
+      checkAndResetReviews,
+      useWheel,
+      updateUserAvatar, 
+      updateUserProfile,
+      changePassword
+    }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Re-export useAuth from the AuthContext module to maintain compatibility
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;

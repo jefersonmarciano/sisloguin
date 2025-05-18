@@ -1,3 +1,4 @@
+
 export default {
   profile: 'Perfil',
   settings: 'Configuración',
@@ -28,10 +29,4 @@ export default {
   profileManagement: 'Gestión de Perfil',
   profilePhoto: 'Foto de Perfil',
   accountSettings: 'Configuración de Cuenta',
-  // Add new translations for timeout
-  uploadTimeout: 'Tiempo de Espera Agotado',
-  uploadTakingTooLong: 'La carga está tardando demasiado. Por favor, inténtalo de nuevo.',
-  processing: 'Procesando...',
-  stillWorking: 'Seguimos trabajando...',
-  uploadDisabled: 'Carga deshabilitada durante el procesamiento'
 };

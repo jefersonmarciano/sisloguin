@@ -20,7 +20,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ filteredFaqs }) => {
   return (
     <section className="max-w-3xl mx-auto px-4 mb-12">
       <div className="flex items-center mb-6">
-        <HelpCircle className="h-6 w-6 text-sisloguin-orange mr-2" />
+        <HelpCircle className="h-6 w-6 text-temu-orange mr-2" />
         <h2 className="text-2xl font-bold">{t('frequentlyAskedQuestions')}</h2>
       </div>
 
@@ -28,7 +28,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ filteredFaqs }) => {
         <Accordion type="single" collapsible className="w-full">
           {filteredFaqs.map((faq) => (
             <AccordionItem key={faq.id} value={faq.id}>
-              <AccordionTrigger className="text-left font-medium text-lg hover:text-sisloguin-orange">
+              <AccordionTrigger className="text-left font-medium text-lg hover:text-temu-orange">
                 {faq.question[language] || faq.question.en}
               </AccordionTrigger>
               <AccordionContent className="text-gray-700">

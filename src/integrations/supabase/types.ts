@@ -33,6 +33,40 @@ export type Database = {
         }
         Relationships: []
       }
+        profiles: {
+            Row: {
+              avatar_color: string | null
+              avatar_url: string | null
+              country_code: string | null
+              created_at: string
+              full_name: string | null
+              id: string
+              phone_number: string | null
+              updated_at: string
+            }
+            Insert: {
+              avatar_color?: string | null
+              avatar_url?: string | null
+              country_code?: string | null
+              created_at?: string
+              full_name?: string | null
+              id: string
+              phone_number?: string | null
+              updated_at?: string
+            }
+            Update: {
+              avatar_color?: string | null
+              avatar_url?: string | null
+              country_code?: string | null
+              created_at?: string
+              full_name?: string | null
+              id?: string
+              phone_number?: string | null
+              updated_at?: string
+            }
+            Relationships: []
+          }
+
       community_messages: {
         Row: {
           background_color: string | null
@@ -42,12 +76,9 @@ export type Database = {
           is_translated: boolean
           likes: number
           message_id: string
-          reply_to: Json | null
+          reply_to: string | null
           text: string
           timestamp: number
-          user_id: string | null
-          user_image: string | null
-          user_name: string
         }
         Insert: {
           background_color?: string | null
@@ -57,12 +88,9 @@ export type Database = {
           is_translated?: boolean
           likes?: number
           message_id: string
-          reply_to?: Json | null
+          reply_to?: string | null
           text: string
           timestamp: number
-          user_id?: string | null
-          user_image?: string | null
-          user_name: string
         }
         Update: {
           background_color?: string | null
@@ -72,12 +100,9 @@ export type Database = {
           is_translated?: boolean
           likes?: number
           message_id?: string
-          reply_to?: Json | null
+          reply_to?: string | null
           text?: string
           timestamp?: number
-          user_id?: string | null
-          user_image?: string | null
-          user_name?: string
         }
         Relationships: []
       }
@@ -261,39 +286,7 @@ export type Database = {
         }
         Relationships: []
       }
-      profiles: {
-        Row: {
-          avatar_color: string | null
-          avatar_url: string | null
-          country_code: string | null
-          created_at: string
-          full_name: string | null
-          id: string
-          phone_number: string | null
-          updated_at: string
-        }
-        Insert: {
-          avatar_color?: string | null
-          avatar_url?: string | null
-          country_code?: string | null
-          created_at?: string
-          full_name?: string | null
-          id: string
-          phone_number?: string | null
-          updated_at?: string
-        }
-        Update: {
-          avatar_color?: string | null
-          avatar_url?: string | null
-          country_code?: string | null
-          created_at?: string
-          full_name?: string | null
-          id?: string
-          phone_number?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
+
       recent_activities: {
         Row: {
           action_type: string
@@ -498,42 +491,45 @@ export type Database = {
       user_progress: {
         Row: {
           balance: number
-          created_at: string
+          id: string
           inspector_reviews_completed: number
           last_review_reset: string | null
           last_updated: string
           like_reviews_completed: number
           reviews_completed: number
-          reviews_limit: number
-          theme: string | null
+          reviews_limit : number
           user_id: string
           wheels_remaining: number
+          theme: string
+          balance: number
         }
         Insert: {
           balance?: number
-          created_at?: string
+          id?: string
           inspector_reviews_completed?: number
           last_review_reset?: string | null
           last_updated?: string
           like_reviews_completed?: number
           reviews_completed?: number
-          reviews_limit?: number
-          theme?: string | null
           user_id: string
           wheels_remaining?: number
+          reviews_limit?: number
+          theme?: string
+          balance?: number
         }
         Update: {
           balance?: number
-          created_at?: string
+          id?: string
           inspector_reviews_completed?: number
           last_review_reset?: string | null
           last_updated?: string
           like_reviews_completed?: number
           reviews_completed?: number
-          reviews_limit?: number
-          theme?: string | null
           user_id?: string
           wheels_remaining?: number
+          reviews_limit?: number
+          theme?: string
+          balance?: number
         }
         Relationships: []
       }

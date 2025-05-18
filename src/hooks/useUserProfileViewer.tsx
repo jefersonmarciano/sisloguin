@@ -23,7 +23,6 @@ export const useUserProfileViewer = (): UseUserProfileViewerReturn => {
       country: user.country,
       location: user.location || 'Unknown', // Add default if location is missing
       registrationDate: user.registrationDate,
-      level: user.level,
       withdrawals: user.withdrawals.map(w => ({
         id: w.id,
         userId: w.userId,

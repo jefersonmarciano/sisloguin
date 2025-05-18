@@ -4,6 +4,7 @@ import { useLanguage } from '../../../contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Loader2 } from 'lucide-react';
 
 interface ProfileFormProps {
   name: string;
@@ -34,6 +35,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
           onChange={(e) => setName(e.target.value)}
           className="w-full"
           required
+          disabled={isSubmitting}
         />
       </div>
       
@@ -46,15 +48,22 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
           onChange={(e) => setEmail(e.target.value)}
           className="w-full"
           required
+          disabled={isSubmitting}
         />
+        <p className="text-xs text-gray-500">{t('changeEmailNote') || 'Se você alterar seu email, precisará verificá-lo novamente.'}</p>
       </div>
       
       <Button 
         type="submit" 
-        className="bg-sisloguin-orange hover:bg-orange-600"
+        className="bg-temu-orange hover:bg-orange-600"
         disabled={isSubmitting}
       >
-        {isSubmitting ? t('saving') : t('saveChanges')}
+        {isSubmitting ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            {t('saving')}
+          </>
+        ) : t('saveChanges')}
       </Button>
     </form>
   );

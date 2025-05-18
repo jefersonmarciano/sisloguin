@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ProgressTabs from '@/components/ProgressTabs';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -7,6 +6,7 @@ import { useUserSession } from '@/hooks/useUserSession';
 import ConnectionTest from '@/components/SupabaseTests/ConnectionTest';
 import RLSTest from '@/components/SupabaseTests/RLSTest';
 import DebugPanel from '@/components/SupabaseTests/DebugPanel';
+import { DailyResetTest } from '../../components/DailyResetTest';
 
 const ProgressPage: React.FC = () => {
   const { language } = useLanguage();
@@ -25,6 +25,8 @@ const ProgressPage: React.FC = () => {
       <ProgressTabs saveProgress={saveProgress} />
       
       <DebugPanel saveProgress={saveProgress} />
+      
+      <DailyResetTest />
     </div>
   );
 };

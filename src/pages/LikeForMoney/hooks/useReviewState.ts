@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useToast } from '../../../hooks/use-toast';
@@ -53,9 +52,20 @@ export const useReviewState = () => {
   // Check if daily limit is reached
   useEffect(() => {
     if (reviewsCompleted >= reviewsLimit) {
-      setShowCooldown(true);
+      if (user?.lastReviewReset) {
+        const lastReset = new Date(user.lastReviewReset);
+        const endTime = lastReset.getTime() + (24 * 60 * 60 * 1000);
+        const now = Date.now();
+        if (now < endTime) {
+          setShowCooldown(true);
+        } else {
+          checkAndResetReviews();
+        }
+      } else {
+        setShowCooldown(true);
+      }
     }
-  }, [reviewsCompleted]);
+  }, [reviewsCompleted, user?.lastReviewReset, checkAndResetReviews]);
   
   const currentProduct = products.length > 0 ? products[currentProductIndex % products.length] : null;
   
@@ -83,7 +93,7 @@ export const useReviewState = () => {
   
   const handleLike = () => {
     // Updated reward value between 3-7 dollars
-    const reward = 5.50;
+    const reward = 2.75;
     setEarnedToday((prev) => prev + reward);
     setResults(prev => [...prev, {type: 'like', reward}]);
     
@@ -107,7 +117,7 @@ export const useReviewState = () => {
   
   const handleDislike = () => {
     // Updated reward value between 3-7 dollars
-    const reward = 3.75;
+    const reward = 1.875;
     setEarnedToday((prev) => prev + reward);
     setResults(prev => [...prev, {type: 'dislike', reward}]);
     

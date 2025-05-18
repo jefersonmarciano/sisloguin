@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserProgress } from '@/hooks/useUserProgress';
@@ -8,7 +9,6 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { toast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabase';
 import { LogOut, RefreshCw, Plus, PaintBucket } from 'lucide-react';
-import { LogoutButton } from '@/components/LogoutButton';
 
 const TestUserProgress: React.FC = () => {
   const { t, language } = useLanguage();
@@ -227,7 +227,10 @@ const TestUserProgress: React.FC = () => {
                 <RefreshCw className="h-4 w-4" />
                 {language === 'en' ? 'Refresh Data' : 'Actualizar Datos'}
               </Button>
-              <LogoutButton variant="destructive" text={language === 'en' ? 'Logout' : 'Cerrar sesión'} />
+              <Button onClick={handleLogout} className="flex items-center gap-2" variant="destructive">
+                <LogOut className="h-4 w-4" />
+                {language === 'en' ? 'Logout' : 'Cerrar sesión'}
+              </Button>
             </div>
             <p className="text-xs text-muted-foreground mt-2 text-center">
               {language === 'en' 

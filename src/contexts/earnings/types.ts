@@ -6,14 +6,15 @@ export interface Transaction {
   amount: number;
   type: 'review' | 'wheel' | 'inspector' | 'withdraw' | 'like';
   status: 'completed' | 'pending' | 'failed';
-  created_at?: string;
 }
 
 export interface EarningsContextType {
   transactions: Transaction[];
-  addTransaction: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
+  addTransaction: (transaction: Omit<Transaction, 'id' | 'date'>) => Promise<void>;
   getEarningsByType: (type: Transaction['type']) => number;
   getTotalEarnings: () => number;
   getWithdrawalsTotal: () => number;
   canWithdraw: (amount: number) => { allowed: boolean; reason?: string };
+  loading: boolean;
+  error: string | null;
 }

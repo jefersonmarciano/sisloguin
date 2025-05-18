@@ -2,7 +2,7 @@
 import { useCallback } from 'react';
 import { User } from '../../types/auth';
 import { supabase } from '../../lib/supabase';
-import { updateUserProfileData } from '@/utils/auth';
+import { updateUserProfileData } from '../../utils/authUtils';
 
 export const useProfileAvatar = (user: User | null, setUser: (user: User | null) => void) => {
   // Update user avatar in Supabase and locally
@@ -31,11 +31,15 @@ export const useProfileAvatar = (user: User | null, setUser: (user: User | null)
       // Update the user state, profiles table, and localStorage regardless of Supabase auth success
       const updatedUser = {
         ...user,
+        avatarUrl: finalAvatarUrl,
         avatar: finalAvatarUrl
       };
       
       setUser(updatedUser);
-      return await updateUserProfileData(user.id, { avatar: finalAvatarUrl });
+      return await updateUserProfileData(user.id, { 
+        avatarUrl: finalAvatarUrl,
+        avatar: finalAvatarUrl
+      });
       
     } catch (error) {
       console.error("Error updating avatar:", error);

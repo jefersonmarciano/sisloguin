@@ -1,4 +1,3 @@
-
 import { useCallback } from 'react';
 import { supabase, formatTimestamp } from '@/lib/supabase';
 import { getLocalUserProgress } from './useLocalStorage';
@@ -12,7 +11,7 @@ export function useSyncProgress(
     if (!userId) return;
     
     const localData = getLocalUserProgress(userId);
-    if (!localData || !localData.last_updated) return;
+    if (!localData) return;
     
     try {
       console.log('Attempting to sync local data with Supabase...');
@@ -29,8 +28,33 @@ export function useSyncProgress(
         return;
       }
       
-      // If local data is more recent, sync to server
-      if (!serverData || new Date(localData.last_updated) > new Date(serverData.last_updated)) {
+      // Se não houver dados no servidor, cria um novo registro
+      if (!serverData) {
+        console.log('No server data found, creating new record...');
+        const { error: insertError } = await supabase
+          .from('user_progress')
+          .insert([{
+            user_id: userId,
+            ...localData,
+            last_updated: formatTimestamp(new Date())
+          }]);
+          
+        if (insertError) {
+          console.error('Error creating server record:', insertError.message, insertError.details);
+          return;
+        }
+        
+        console.log('Created new server record');
+        setLastSyncTime(new Date());
+        return;
+      }
+      
+      // Compara timestamps para decidir qual dado é mais recente
+      const localTimestamp = localData.last_updated ? new Date(localData.last_updated) : new Date(0);
+      const serverTimestamp = serverData.last_updated ? new Date(serverData.last_updated) : new Date(0);
+      
+      // Se os dados locais são mais recentes, atualiza o servidor
+      if (localTimestamp > serverTimestamp) {
         console.log('Local data is more recent, syncing to Supabase...');
         
         // Remove local ID if present
@@ -57,8 +81,13 @@ export function useSyncProgress(
         } catch (syncErr: any) {
           console.error('Error during sync operation:', syncErr?.message || syncErr);
         }
+      } else if (serverTimestamp > localTimestamp) {
+        // Se os dados do servidor são mais recentes, atualiza o localStorage
+        console.log('Server data is more recent, updating local storage...');
+        localStorage.setItem(`user_progress_${userId}`, JSON.stringify(serverData));
+        setLastSyncTime(new Date());
       } else {
-        console.log('Server data is more recent or equal, no sync needed');
+        console.log('Data is in sync, no update needed');
       }
     } catch (e: any) {
       console.error('Unexpected error during sync:', e?.message || e);

@@ -13,7 +13,7 @@ const SupportHeader: React.FC<SupportHeaderProps> = ({ searchQuery, setSearchQue
   const { t } = useLanguage();
 
   return (
-    <section className="bg-gradient-to-r from-sisloguin-orange to-teal-500 text-white py-12 px-4 rounded-lg mb-8">
+    <section className="bg-gradient-to-r from-temu-orange to-teal-500 text-white py-12 px-4 rounded-lg mb-8">
       <div className="text-center max-w-3xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('supportWelcome')}</h1>
         <p className="text-xl mb-8">{t('supportSubheading')}</p>

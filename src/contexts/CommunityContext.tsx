@@ -1,8 +1,8 @@
 
-import React, { createContext, useContext, ReactNode, useState } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { ChatMessage } from '../utils/commentGenerator';
 import { useCommunityMessages } from '../hooks/useCommunityMessages';
-import { AuthContext } from './AuthContext';
+import { useAuth } from './AuthContext';
 
 interface CommunityContextType {
   messages: ChatMessage[];
@@ -12,7 +12,6 @@ interface CommunityContextType {
   clearNotifications: () => void;
   totalCommentCount: number;
   recentMessages: ChatMessage[]; // For showing on the home page
-  isAuthenticated: boolean; // Accept authentication state passed from parent
 }
 
 const CommunityContext = createContext<CommunityContextType | undefined>(undefined);
@@ -30,10 +29,6 @@ interface CommunityProviderProps {
 }
 
 export const CommunityProvider: React.FC<CommunityProviderProps> = ({ children }) => {
-  // Get auth state directly from parent component via useContext
-  const authContext = useContext(AuthContext);
-  const isAuthenticated = authContext?.isAuthenticated || false;
-
   const {
     messages,
     notificationHistory,
@@ -42,7 +37,7 @@ export const CommunityProvider: React.FC<CommunityProviderProps> = ({ children }
     addMessage,
     updateMessage,
     clearNotifications
-  } = useCommunityMessages(isAuthenticated);
+  } = useCommunityMessages();
   
   return (
     <CommunityContext.Provider 
@@ -53,8 +48,7 @@ export const CommunityProvider: React.FC<CommunityProviderProps> = ({ children }
         notificationHistory,
         clearNotifications,
         totalCommentCount,
-        recentMessages,
-        isAuthenticated
+        recentMessages
       }}
     >
       {children}

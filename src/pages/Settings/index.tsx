@@ -28,9 +28,9 @@ const Settings = () => {
       </div>
       
       {/* General Settings */}
-      <div className="sisloguin-card">
+      <div className="temu-card">
         <div className="flex items-center space-x-2 mb-4">
-          <SettingsIcon className="h-5 w-5 text-sisloguin-orange" />
+          <SettingsIcon className="h-5 w-5 text-temu-orange" />
           <h2 className="font-medium">{t('generalSettings')}</h2>
         </div>
         
@@ -42,13 +42,13 @@ const Settings = () => {
             </div>
             <div className="flex space-x-2">
               <button 
-                className={`px-2 py-1 text-xs rounded flex items-center ${language === 'en' ? 'bg-sisloguin-orange text-white' : 'bg-gray-100'}`}
+                className={`px-2 py-1 text-xs rounded flex items-center ${language === 'en' ? 'bg-temu-orange text-white' : 'bg-gray-100'}`}
                 onClick={() => setLanguage('en')}
               >
                 <span className="mr-1">🇺🇸</span> English
               </button>
               <button 
-                className={`px-2 py-1 text-xs rounded flex items-center ${language === 'es' ? 'bg-sisloguin-orange text-white' : 'bg-gray-100'}`}
+                className={`px-2 py-1 text-xs rounded flex items-center ${language === 'es' ? 'bg-temu-orange text-white' : 'bg-gray-100'}`}
                 onClick={() => setLanguage('es')}
               >
                 <span className="mr-1">🇪🇸</span> Español
@@ -57,7 +57,7 @@ const Settings = () => {
           </div>
           
           <div className="border-t pt-4">
-            <Button onClick={handleSaveSettings} className="bg-sisloguin-orange hover:bg-orange-600 text-sm">
+            <Button onClick={handleSaveSettings} className="bg-temu-orange hover:bg-orange-600 text-sm">
               {t('saveChanges')}
             </Button>
           </div>
@@ -65,9 +65,9 @@ const Settings = () => {
       </div>
       
       {/* Notification Settings */}
-      <div className="sisloguin-card">
+      <div className="temu-card">
         <div className="flex items-center space-x-2 mb-4">
-          <Bell className="h-5 w-5 text-sisloguin-orange" />
+          <Bell className="h-5 w-5 text-temu-orange" />
           <h2 className="font-medium">{t('notificationSettings')}</h2>
         </div>
         

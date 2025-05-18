@@ -1,82 +1,137 @@
-
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { Transaction, EarningsContextType } from './types';
-import { useEarningsPersistence } from './useEarningsPersistence';
-import { useBalanceSync } from './useBalanceSync';
-import { 
-  calculateEarningsByType, 
-  calculateTotalEarnings, 
+import { useUserProgress } from './useUserProgress';
+import { User } from '@/types/auth';
+import {
+  calculateEarningsByType,
+  calculateTotalEarnings,
   calculateWithdrawalsTotal,
   checkWithdrawalEligibility
 } from './earningsUtils';
+import { useAuth } from '../AuthContext';
+import { supabase } from '@/lib/supabase';
 
-// Create the context with undefined as initial value
 const EarningsContext = createContext<EarningsContextType | undefined>(undefined);
 
 interface EarningsProviderProps {
   children: ReactNode;
 }
 
-// Starting with no initial transactions
-const initialTransactions: Transaction[] = [];
-
 export const EarningsProvider = ({ children }: EarningsProviderProps) => {
-  // Initialize transactions state from localStorage or empty array
-  const [transactions, setTransactions] = useState<Transaction[]>(() => {
-    const savedTransactions = localStorage.getItem('temuTransactions');
-    return savedTransactions ? JSON.parse(savedTransactions) : initialTransactions;
-  });
-  
-  // Use our custom hooks for persistence and balance syncing
-  useEarningsPersistence(transactions);
-  useBalanceSync(transactions);
+  const { user } = useAuth();
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Add a new transaction
-  const addTransaction = (transaction: Omit<Transaction, 'id' | 'date'>): void => {
-    const newTransaction = {
-      ...transaction,
-      id: Date.now().toString(),
-      date: new Date().toISOString().split('T')[0]
-    };
-    
-    setTransactions(prevTransactions => [newTransaction, ...prevTransactions]);
+  // Fetch transactions from Supabase
+  const fetchTransactions = async () => {
+    if (!user?.id) return;
+
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      const formattedTransactions = data.map(t => ({
+        id: t.id,
+        date: t.date,
+        amount: t.amount,
+        type: t.activity as Transaction['type'],
+        status: t.status as Transaction['status']
+      }));
+
+      setTransactions(formattedTransactions);
+    } catch (err) {
+      console.error('Error fetching transactions:', err);
+      setError('Failed to load transactions');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Get earnings by type using our utility function
+  // Add a new transaction to Supabase
+  const addTransaction = async (transaction: Omit<Transaction, 'id' | 'date'>): Promise<void> => {
+    if (!user?.id) return;
+
+    try {
+      const newTransaction = {
+        activity: transaction.type,
+        amount: transaction.amount,
+        date: new Date().toISOString().split('T')[0],
+        status: transaction.status,
+        user_id: user.id
+      };
+
+      const { data, error } = await supabase
+        .from('transactions')
+        .insert(newTransaction)
+        .select();
+
+      if (error) throw error;
+
+      if (data && data[0]) {
+        const formattedTransaction: Transaction = {
+          id: data[0].id,
+          date: data[0].date,
+          amount: data[0].amount,
+          type: data[0].activity as Transaction['type'],
+          status: data[0].status as Transaction['status']
+        };
+
+        setTransactions(prev => [formattedTransaction, ...prev]);
+      }
+    } catch (err) {
+      console.error('Error adding transaction:', err);
+      throw err;
+    }
+  };
+
+  // Fetch transactions when user changes
+  useEffect(() => {
+    fetchTransactions();
+  }, [user?.id]);
+
+  // Get earnings by type
   const getEarningsByType = (type: Transaction['type']): number => {
     return calculateEarningsByType(transactions, type);
   };
 
-  // Get total earnings using our utility function
+  // Get total earnings
   const getTotalEarnings = (): number => {
     return calculateTotalEarnings(transactions);
   };
-  
-  // Get withdrawals total using our utility function
+
+  // Get withdrawals total
   const getWithdrawalsTotal = (): number => {
     return calculateWithdrawalsTotal(transactions);
   };
-  
-  // Check if user can withdraw using our utility function
+
+  // Check if user can withdraw
   const canWithdraw = (amount: number): { allowed: boolean; reason?: string } => {
     return checkWithdrawalEligibility(transactions, amount);
   };
 
   return (
-    <EarningsContext.Provider value={{ 
-      transactions, 
-      addTransaction, 
-      getEarningsByType, 
+    <EarningsContext.Provider value={{
+      transactions,
+      addTransaction,
+      getEarningsByType,
       getTotalEarnings,
       getWithdrawalsTotal,
-      canWithdraw
+      canWithdraw,
+      loading,
+      error
     }}>
       {children}
     </EarningsContext.Provider>
   );
 };
 
-// Custom hook to use the earnings context
 export const useEarnings = (): EarningsContextType => {
   const context = useContext(EarningsContext);
   if (context === undefined) {

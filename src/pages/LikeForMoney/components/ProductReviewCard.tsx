@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { Product } from '../types';
@@ -41,7 +40,7 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
         {/* Product information */}
         <div className="text-center w-full">
           <h2 className="font-bold text-xl">{product.name}</h2>
-          <p className="text-2xl font-medium text-sisloguin-orange mt-2">${product.price.toFixed(2)}</p>
+          <p className="text-2xl font-medium text-temu-orange mt-2">${product.price.toFixed(2)}</p>
         </div>
         
         {/* Product description */}
@@ -50,13 +49,13 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
         </div>
         
         {/* Review question and actions */}
-        <div className="p-5 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-md text-center">
-          <p className="font-medium text-gray-800 mb-4">{product.question}</p>
+        <div className="p-5 bg-gray-800 rounded-xl border border-gray-700 shadow-sm w-full max-w-md text-center">
+          <p className="font-medium text-gray-100 mb-4">{product.question}</p>
           
           {/* Timer indicator */}
-          <div className="w-full bg-gray-200 h-2 rounded-full mb-4">
+          <div className="w-full bg-gray-700 h-2 rounded-full mb-4">
             <div 
-              className="bg-sisloguin-orange h-full rounded-full transition-all duration-1000"
+              className="bg-temu-orange h-full rounded-full transition-all duration-1000"
               style={{ width: `${(timeRemaining / 30) * 100}%` }}
             />
           </div>
@@ -86,14 +85,14 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
           {/* Skip button */}
           <button 
             onClick={handleSkip}
-            className="text-sm text-gray-500 hover:text-gray-700 hover:underline w-full text-center block mt-4 transition-colors"
+            className="text-sm text-gray-400 hover:text-gray-200 hover:underline w-full text-center block mt-4 transition-colors"
           >
             {t('skipProduct')}
           </button>
         </div>
 
         {/* Rewards information */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800 w-full max-w-md">
+        <div className="bg-blue-900 border border-blue-700 rounded-lg p-3 text-sm text-blue-300 w-full max-w-md">
           <p className="font-medium">{t('rewardsText')}</p>
           <ul className="list-disc pl-5 mt-1 space-y-1">
             <li>{t('likeReward')}</li>

@@ -8,7 +8,7 @@ const HowToUse: React.FC = () => {
   
   // Icons for the steps
   const stepIcons = [
-    { icon: <Star className="h-6 w-6 text-white" />, color: 'bg-sisloguin-orange' },
+    { icon: <Star className="h-6 w-6 text-white" />, color: 'bg-temu-orange' },
     { icon: <AlertTriangle className="h-6 w-6 text-white" />, color: 'bg-blue-500' },
     { icon: <Wallet className="h-6 w-6 text-white" />, color: 'bg-purple-500' },
     { icon: <DollarSign className="h-6 w-6 text-white" />, color: 'bg-green-500' }
@@ -18,13 +18,13 @@ const HowToUse: React.FC = () => {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <BookText className="h-6 w-6 text-sisloguin-orange mr-2" />
+          <BookText className="h-6 w-6 text-temu-orange mr-2" />
           <h1 className="text-2xl font-bold">{t('howToUse')}</h1>
         </div>
       </div>
       
       {/* Video Section */}
-      <div className="sisloguin-card mb-6">
+      <div className="temu-card mb-6">
         <h2 className="font-bold text-lg mb-4">{t('howItWorks')}</h2>
         <div className="relative pt-[56.25%] mb-6">
           <iframe 
@@ -39,7 +39,7 @@ const HowToUse: React.FC = () => {
       </div>
       
       {/* Steps Section */}
-      <div className="sisloguin-card">
+      <div className="temu-card">
         <h2 className="font-bold text-lg mb-4">{t('howItWorks')}</h2>
         
         <div className="space-y-6">

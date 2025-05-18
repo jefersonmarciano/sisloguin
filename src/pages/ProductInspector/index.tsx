@@ -11,7 +11,7 @@ import InspectionContainer from './components/InspectionContainer';
 import InspectionWelcome from './components/InspectionWelcome';
 import SessionSummary from './components/SessionSummary';
 import ResultScreen from './components/ResultScreen';
-import ProductInspectorCooldownTimer from './components/CooldownTimer';
+import CooldownTimer from './components/CooldownTimer';
 
 const ProductInspector: React.FC = () => {
   const { user, checkAndResetReviews } = useAuth();
@@ -71,10 +71,10 @@ const ProductInspector: React.FC = () => {
         />
       )}
       
-      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300">
+      <div className="bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-700 hover:shadow-lg transition-all duration-300">
         {showCooldown ? (
-          <ProductInspectorCooldownTimer 
-            hoursToWait={6} 
+          <CooldownTimer 
+            hoursToWait={24} 
             onComplete={() => {
               setShowCooldown(false);
               setResults([]);

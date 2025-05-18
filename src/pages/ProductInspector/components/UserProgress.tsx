@@ -12,7 +12,7 @@ const UserProgress: React.FC<UserProgressProps> = ({ completed, limit }) => {
   const { t } = useLanguage();
   
   return (
-    <div className="sisloguin-card mb-6">
+    <div className="temu-card mb-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold text-lg">{t('dailyTasks')}</h2>
         <div className="text-sm text-gray-500">

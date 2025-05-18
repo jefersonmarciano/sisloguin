@@ -15,20 +15,20 @@ const UserProfileDropdown: React.FC = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="h-7 w-7 cursor-pointer hover:scale-105 transition-transform">
-          <AvatarImage src={user.avatar} alt="User avatar" />
-          <AvatarFallback className="bg-sisloguin-orange text-white">{user.name.charAt(0)}</AvatarFallback>
+          <AvatarImage src={user?.avatarUrl || user?.avatar} alt="User avatar" />
+          <AvatarFallback className="bg-temu-orange text-white">{(user?.fullName || user?.name || '').charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 z-50 bg-white">
         {/* User info section */}
         <div className="flex items-center gap-2 p-2">
           <Avatar>
-            <AvatarImage src={user.avatar} alt="Profile picture" />
-            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+            <AvatarImage src={user?.avatarUrl || user?.avatar} alt="Profile picture" />
+            <AvatarFallback>{(user?.fullName || user?.name || '').charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <span className="font-medium">{user.name}</span>
-            <span className="text-xs text-gray-500">{user.email}</span>
+            <span className="font-medium">{user?.fullName || user?.name}</span>
+            <span className="text-xs text-gray-500">{user?.email}</span>
           </div>
         </div>
         <DropdownMenuSeparator />

@@ -1,3 +1,4 @@
+
 import { useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { getLocalUserProgress, saveLocalUserProgress } from './useLocalStorage';
@@ -34,16 +35,18 @@ export function useInitializeProgress(userId: string | undefined, fetchUserProgr
             console.log('No user progress found in Supabase, creating new entry...');
             
             // Create a new progress record with required user_id field
-            const newProgress = {
+            const newProgress: UserProgress = {
               user_id: userId,
               balance: 0,
               reviews_completed: 0,
               like_reviews_completed: 0,
               inspector_reviews_completed: 0,
-              reviews_limit: 20,
-              wheels_remaining: 1,
+              reviews_limit: 10,
+              wheels_remaining: 3,
               theme: 'light',
-              last_updated: new Date().toISOString()
+              last_updated: new Date().toISOString(),
+              last_review_reset: null,
+              created_at: new Date().toISOString()
             };
             
             // Insert new record into Supabase

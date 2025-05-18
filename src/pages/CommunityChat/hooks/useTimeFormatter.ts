@@ -1,28 +1,32 @@
+// src/pages/CommunityChat/hooks/useTimeFormatter.ts
+import { useLanguage } from '@/contexts/LanguageContext';
 
-import { useCallback } from 'react';
-import { useLanguage } from '../../../contexts/LanguageContext';
-
+// Export as named export
 export const useTimeFormatter = () => {
   const { language } = useLanguage();
-  
-  // Format timestamp to relative time with language support
-  const formatTimestamp = useCallback((date: Date) => {
-    const now = new Date();
-    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-    
-    if (language === 'es') {
-      if (diffInSeconds < 60) return `hace ${diffInSeconds} segundos`;
-      if (diffInSeconds < 3600) return `hace ${Math.floor(diffInSeconds / 60)} minutos`;
-      if (diffInSeconds < 86400) return `hace ${Math.floor(diffInSeconds / 3600)} horas`;
-      return `hace ${Math.floor(diffInSeconds / 86400)} días`;
-    } else {
-      // Default to English
-      if (diffInSeconds < 60) return `${diffInSeconds} seconds ago`;
-      if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-      if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-      return `${Math.floor(diffInSeconds / 86400)} days ago`;
+
+  const formatTimestamp = (timestamp: number | Date) => {
+    // Convert to Date if it's a number (Unix timestamp)
+    const date = typeof timestamp === 'number' 
+      ? new Date(timestamp) 
+      : timestamp;
+
+    // Fallback in case the date is invalid
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+      return '';
     }
-  }, [language]);
-  
+
+    return new Intl.DateTimeFormat(language, {
+      hour: '2-digit',
+      minute: '2-digit',
+      day: '2-digit',
+      month: 'short',
+      year: language === 'en' ? 'numeric' : undefined,
+    }).format(date);
+  };
+
   return { formatTimestamp };
 };
+
+// Alternatively, you could also export as default
+// export default useTimeFormatter;

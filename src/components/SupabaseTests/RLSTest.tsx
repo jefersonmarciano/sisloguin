@@ -70,15 +70,14 @@ const RLSTest = ({ onTestComplete }: RLSTestProps) => {
       }
       
       // Update test
-      // Fix: user_progress doesn't have an 'id' field, use 'user_id' instead
-      const insertedRecord = insertData && insertData[0] ? insertData[0] : null;
+      const latestId = insertData && insertData[0] ? insertData[0].id : null;
       let updateResult = false;
       
-      if (insertedRecord) {
+      if (latestId) {
         const { error: updateError } = await supabase
           .from('user_progress')
           .update({ balance: 110.0 })
-          // Fix: Use user_id instead of id for the update
+          .eq('id', latestId)
           .eq('user_id', user.id);
         
         console.log('Update result:', updateError);

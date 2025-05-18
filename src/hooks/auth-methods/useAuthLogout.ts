@@ -1,8 +1,7 @@
 
-// This file is kept for backward compatibility
-// It now imports and re-exports methods from useAuthUI
 import { useState } from 'react';
-import { useAuthService } from '../useAuthService';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/components/ui/use-toast';
 
 export const useAuthLogout = (
   user: any,
@@ -10,26 +9,53 @@ export const useAuthLogout = (
   setIsAuthenticated: (value: boolean) => void
 ) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { logout: authServiceLogout } = useAuthService();
 
-  // Changed method name from logoutAndCleanLocalData to logout for consistency
-  const logout = async () => {
+  // Changed method to handle Promise errors properly
+  const logoutAndCleanLocalData = async () => {
     try {
       setLoading(true);
       
-      await authServiceLogout();
-      // Let onAuthStateChange handle the state updates
+      // Properly typed Promise construction
+      await new Promise<void>((resolve, reject) => {
+        const promise = supabase.auth.signOut();
+        
+        // Use proper Promise methods with typing
+        promise
+          .then(() => {
+            console.log("User signed out successfully");
+            resolve();
+          })
+          .catch(error => {
+            console.error("Error during sign out:", error);
+            reject(error);
+          });
+      });
       
+      // Clear user-related data from localStorage
+      localStorage.removeItem('temuUser');
+      
+      // Reset user state
+      setUser(null);
+      setIsAuthenticated(false);
+      
+      toast({
+        title: 'Logged Out',
+        description: 'You have been successfully logged out.'
+      });
     } catch (error) {
       console.error("Error during logout:", error);
-      throw error;
+      toast({
+        variant: 'destructive',
+        title: 'Logout Error',
+        description: 'There was a problem signing out. Please try again.'
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return {
-    logout,
+    logout: logoutAndCleanLocalData,
     loading
   };
 };

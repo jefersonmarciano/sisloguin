@@ -1,27 +1,22 @@
 import React from 'react';
-import CooldownTimer from '@/components/common/CooldownTimer';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '../../../contexts/LanguageContext';
+import BaseCooldownTimer from '../../../components/cooldown/BaseCooldownTimer';
 
 interface ReviewCooldownTimerProps {
-  hoursToWait: number;
+  endTime: Date;
   onComplete: () => void;
-  debug?: boolean;
 }
 
-const ReviewCooldownTimer: React.FC<ReviewCooldownTimerProps> = ({ hoursToWait, onComplete, debug = false }) => {
+const ReviewCooldownTimer: React.FC<ReviewCooldownTimerProps> = ({ endTime, onComplete }) => {
   const { t } = useLanguage();
-  
+
   return (
-    <CooldownTimer
-      hoursToWait={hoursToWait}
+    <BaseCooldownTimer
+      endTime={endTime}
       onComplete={onComplete}
-      storageKey="likeCooldownEnd"
-      dbField="last_like_review"
-      dbCooldownEndField="like_cooldown_end"
       title={t('dailyLimitReached')}
-      message={`${t('youveCompletedAllReviews')}!`}
-      color="temu-orange"
-      debug={debug}
+      description={t('You have reached your daily limit for reviews.')}
+      showBackButton={true}
     />
   );
 };

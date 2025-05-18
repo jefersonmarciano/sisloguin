@@ -19,13 +19,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   
   return (
     <div className="text-center p-8">
-      <h2 className="font-bold text-xl mb-6">{t('spinTheWheel')}</h2>
+      <h2 className="font-bold text-xl mb-6 text-gray-100">{t('spinTheWheel')}</h2>
       
       <div className="mt-8">
         <Button 
           onClick={handleSpin}
           disabled={isSpinning || wheelsRemaining <= 0}
-          className={`py-3 px-10 bg-sisloguin-orange hover:bg-sisloguin-orange/90 text-white rounded-lg text-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-sisloguin-orange focus:ring-offset-2 ${isSpinning ? 'animate-pulse' : ''} ${(isSpinning || wheelsRemaining <= 0) ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`py-3 px-10 bg-temu-orange hover:bg-temu-orange/90 text-white rounded-lg text-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-temu-orange focus:ring-offset-2 ${isSpinning ? 'animate-pulse' : ''} ${(isSpinning || wheelsRemaining <= 0) ? 'opacity-50 cursor-not-allowed' : ''}`}
           aria-label={isSpinning ? t('wheelSpinning') : t('wheelSpinToPrizes')}
         >
           {isSpinning ? t('spinning') : t('spin')}
@@ -39,7 +39,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
             key={i}
             aria-hidden="true"
             className={`w-3 h-3 rounded-full ${
-              i < wheelsRemaining ? "bg-[#f97316]" : "bg-gray-300"
+              i < wheelsRemaining ? "bg-[#f97316]" : "bg-gray-700"
             }`}
           />
         ))}
@@ -47,8 +47,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 
       <div className="mt-4 w-full">
         <div className="flex justify-between items-center px-2">
-          <span className="text-gray-500">{t('todaysWinnings')}:</span>
-          <span className="font-bold text-green-500">
+          <span className="text-gray-300">{t('todaysWinnings')}:</span>
+          <span className="font-bold text-green-400">
             ${dailyWheelEarnings.toFixed(2)}
           </span>
         </div>

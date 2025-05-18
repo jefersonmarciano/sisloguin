@@ -40,7 +40,7 @@ const UserListItem: React.FC<UserListItemProps> = ({ user, rank, onClick }) => {
       </div>
       
       <div className="flex items-center font-medium text-sm">
-        <DollarSign className="h-3 w-3 text-sisloguin-orange mr-1" />
+        <DollarSign className="h-3 w-3 text-temu-orange mr-1" />
         {user.earnings.toLocaleString()}
         {rank <= 3 && (
           <Star className="h-3 w-3 text-yellow-500 ml-1" fill="gold" />

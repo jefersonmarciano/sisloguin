@@ -2,10 +2,8 @@
 import { useAuthRegister } from "./useAuthRegister";
 import { useAuthLogin } from "./useAuthLogin";
 import { useAuthLogout } from "./useAuthLogout";
-import { User, ExtendedUser } from "@/types/auth";
+import { User } from "@/types/auth";
 import { useUserProfile } from "../useUserProfile";
-import { useForgotPassword } from "./useForgotPassword";
-import { useAuthUI } from "../useAuthUI";
 
 /**
  * Custom hook that provides authentication methods
@@ -15,14 +13,10 @@ export const useAuthMethods = (
   setUser: (user: User | null) => void, 
   setIsAuthenticated: (value: boolean) => void
 ) => {
-  // Use our new useAuthUI hook for authentication methods with UI feedback
-  const {
-    register,
-    login,
-    logout,
-    resetPassword,
-    updatePassword
-  } = useAuthUI(user, setUser, setIsAuthenticated);
+  // Get auth methods from sub-hooks
+  const { register } = useAuthRegister(user, setUser, setIsAuthenticated);
+  const { login } = useAuthLogin(user, setUser, setIsAuthenticated);
+  const { logout } = useAuthLogout(user, setUser, setIsAuthenticated);
   
   // Import hooks for user profile updates
   const {
@@ -39,7 +33,6 @@ export const useAuthMethods = (
     register,
     login,
     logout,
-    resetPassword,
     updateBalance,
     completeReview,
     checkAndResetReviews,

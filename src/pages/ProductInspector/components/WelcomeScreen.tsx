@@ -17,7 +17,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartInspection }) => {
       </p>
       <button 
         onClick={onStartInspection} 
-        className="sisloguin-button font-mono font-semibold tracking-wide"
+        className="temu-button font-mono font-semibold tracking-wide"
       >
         {t('startInspecting')}
       </button>

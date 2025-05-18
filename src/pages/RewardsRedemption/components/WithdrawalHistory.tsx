@@ -12,10 +12,10 @@ const WithdrawalHistory: React.FC<WithdrawalHistoryProps> = ({ withdrawalHistory
   const { t } = useLanguage();
   
   return (
-    <div className="sisloguin-card">
+    <div className="temu-card">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold text-lg">{t('withdrawalHistory')}</h2>
-        <a href="#" className="text-sisloguin-orange flex items-center text-sm">
+        <a href="#" className="text-temu-orange flex items-center text-sm">
           {t('viewAll')}
           <ChevronRight className="h-4 w-4 ml-1" />
         </a>

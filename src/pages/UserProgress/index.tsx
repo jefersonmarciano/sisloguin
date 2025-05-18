@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserProgress } from '@/hooks/useUserProgress';
@@ -8,8 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import { toast } from '@/components/ui/use-toast';
-import { Sun, Moon, LogOut, Plus, PaintBucket } from 'lucide-react';
-import { LogoutButton } from '@/components/LogoutButton';
+import { Sun, Moon, LogOut, Plus } from 'lucide-react';
 
 const UserProgress: React.FC = () => {
   const { t, language } = useLanguage();
@@ -222,9 +222,10 @@ const UserProgress: React.FC = () => {
         </CardContent>
         
         <CardFooter className="flex justify-between">
-          <LogoutButton 
-            text={language === 'en' ? 'Logout' : 'Cerrar sesión'}
-          />
+          <Button variant="outline" onClick={handleLogout}>
+            <LogOut className="mr-2" />
+            {language === 'en' ? 'Logout' : 'Cerrar sesión'}
+          </Button>
         </CardFooter>
       </Card>
     </div>

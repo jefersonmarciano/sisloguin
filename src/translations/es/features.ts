@@ -1,3 +1,4 @@
+
 export default {
   likeForMoney: 'Me gusta por dinero',
   productInspector: 'Inspector de productos',
@@ -79,10 +80,8 @@ export default {
   keepPracticingFeedback: 'Sigue practicando. Esta evaluación necesitaba una retroalimentación diferente.',
   pleaseEnterAtLeast50Characters: 'Por favor ingresa al menos 50 caracteres en tu evaluación',
   // Traduciones adicionales para la rueda de la suerte
-  todaysSpins: 'Giros de Hoy',
+  todaysSpins: 'Giros de hoy',
   remaining: 'restantes',
   earnPerSpin: 'Gana $3.00-$100.00 por giro',
-  potentialEarningsDaily: 'Ganancias potenciales: hasta $300.00 diarias',
-  spinUsedForToday: '¡Giro usado para hoy! Próximo giro disponible en:',
-  backToHome: 'Volver al Inicio'
+  potentialEarningsDaily: 'Ganancias potenciales: hasta $300.00 diarias'
 };

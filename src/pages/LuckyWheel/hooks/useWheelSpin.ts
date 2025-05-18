@@ -18,7 +18,7 @@ export const useWheelSpin = () => {
   const [currentPrize, setCurrentPrize] = useState<number | null>(null);
   const [wheelResults, setWheelResults] = useState<number[]>([]);
   
-  // Wheel segments with updated values (1.5-3.5 dollars and one $50 prize)
+  // Wheel segments with updated higher values (3-7 dollars and one $100 prize)
   const segments: WheelSegment[] = useMemo(() => [
     { value: 1.50, color: '#f97316', label: '$1.50' },
     { value: 2.50, color: '#3498db', label: '$2.50' },
@@ -80,10 +80,10 @@ export const useWheelSpin = () => {
       // Trigger confetti for non-zero prizes
       if (prize > 0) {
         confetti({
-          particleCount: prize >= 50 ? 200 : 100,
+          particleCount: prize >= 100 ? 200 : 100,
           spread: 70,
           origin: { y: 0.6 },
-          colors: prize >= 50 ? ['#FFD700', '#f97316', '#FFDF00'] : undefined
+          colors: prize >= 100 ? ['#FFD700', '#f97316', '#FFDF00'] : undefined
         });
       }
       

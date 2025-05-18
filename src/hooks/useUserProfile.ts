@@ -11,7 +11,7 @@ export const useUserProfile = (user: User | null, setUser: (user: User | null) =
   // Import functionality from smaller hooks
   const { updateUserProfile, updateUserAvatar, changePassword } = useProfileUpdate(user, setUser);
   const { updateBalance, completeReview, useWheel } = useActivityTracking(user, setUser);
-  const { checkAndResetReviews } = useDailyReset(user, setUser);
+  const { checkAndResetReviews } = useDailyReset();
 
   return {
     // Profile update functions

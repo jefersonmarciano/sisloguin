@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/components/ui/use-toast';
@@ -9,21 +9,12 @@ export function useUserSession() {
   const { user } = useAuth();
   const { language } = useLanguage();
   const [progress, setProgress] = useState<any>(null);
-  const isFetchingRef = useRef(false);
-  const userIdRef = useRef<string | null>(null);
 
   // Function to fetch progress for a specific user
-  const fetchProgress = useCallback(async (userId: string) => {
-    // Avoid duplicate fetches for the same user
-    if (isFetchingRef.current || userId === userIdRef.current) {
-      return;
-    }
+  const fetchProgress = async (userId: string) => {
+    console.log('Buscando progresso para usuário:', userId);
     
     try {
-      console.log('Fetching progress for user:', userId);
-      isFetchingRef.current = true;
-      userIdRef.current = userId;
-      
       const { data, error } = await supabase
         .from('user_progress')
         .select('*')
@@ -31,30 +22,28 @@ export function useUserSession() {
         .single();
         
       if (error) {
-        console.error('Error fetching progress:', error.message);
+        console.error('Erro ao buscar progresso:', error.message);
         toast({
           variant: 'destructive',
           title: language === 'en' ? 'Error' : 'Erro',
           description: error.message
         });
       } else if (data) {
-        console.log('Progress loaded:', data);
+        console.log('Progresso carregado:', data);
         setProgress(data);
       } else {
-        console.log('No progress found for the user');
+        console.log('Nenhum progresso encontrado para o usuário');
         setProgress({ balance: 0, theme: 'light' });
       }
     } catch (err) {
-      console.error('Unexpected error fetching progress:', err);
-    } finally {
-      isFetchingRef.current = false;
+      console.error('Erro inesperado ao buscar progresso:', err);
     }
-  }, [language]);
+  };
 
   // Function to save progress with direct Supabase access
   const saveProgress = async (newProgress: any) => {
     if (!user) {
-      console.log('User not authenticated. Unable to save progress.');
+      console.log('Usuário não autenticado. Não foi possível salvar o progresso.');
       toast({
         variant: 'destructive',
         title: language === 'en' ? 'Error' : 'Erro',
@@ -63,7 +52,7 @@ export function useUserSession() {
       return { success: false, error: 'User not authenticated' };
     }
 
-    console.log('Saving progress for user_id:', user.id, 'Data:', newProgress);
+    console.log('Salvando progresso para user_id:', user.id, 'Dados:', newProgress);
 
     const { data, error } = await supabase
       .from('user_progress')
@@ -74,7 +63,7 @@ export function useUserSession() {
       }]);
 
     if (error) {
-      console.error('Error saving progress:', error.message, 'Details:', error);
+      console.error('Erro ao salvar progresso:', error.message, 'Detalhes:', error);
       toast({
         variant: 'destructive',
         title: language === 'en' ? 'Error' : 'Erro',
@@ -82,7 +71,7 @@ export function useUserSession() {
       });
       return { success: false, error: error.message };
     } else {
-      console.log('Progress saved successfully:', data);
+      console.log('Progresso salvo com sucesso:', data);
       toast({
         title: language === 'en' ? 'Success' : 'Sucesso',
         description: language === 'en' ? 'Progress saved successfully' : 'Progresso salvo com sucesso'
@@ -91,16 +80,54 @@ export function useUserSession() {
     }
   };
 
-  // Load initial progress when user changes
+  // Monitorar alterações de autenticação
   useEffect(() => {
-    if (user?.id && user.id !== userIdRef.current) {
-      fetchProgress(user.id);
-    } else if (!user) {
-      // Reset progress when user logs out
-      setProgress({ balance: 0, theme: 'light' });
-      userIdRef.current = null;
-    }
-  }, [user, fetchProgress]);
+    console.log('useUserSession montado - verificando autenticação inicial');
+    
+    // Verificar sessão inicial
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('Sessão inicial - dados completos:', session);
+      console.log('Usuário na sessão inicial:', session?.user ? {
+        id: session.user.id,
+        email: session.user.email,
+        role: session.user.role,
+        auth_provider: session?.user?.app_metadata?.provider
+      } : 'Nenhum usuário na sessão');
+      
+      if (session?.user) {
+        console.log('Sessão ativa detectada, buscando progresso para:', session.user.id);
+        fetchProgress(session.user.id);
+      } else {
+        console.log('Nenhuma sessão ativa detectada');
+      }
+    });
+
+    // Configurar ouvinte para mudanças de autenticação
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Evento de autenticação detectado:', event);
+      console.log('Dados da sessão após evento:', session);
+      console.log('Usuário após evento de autenticação:', session?.user ? {
+        id: session.user.id,
+        email: session.user.email,
+        role: session.user.role,
+        auth_provider: session?.user?.app_metadata?.provider
+      } : 'Nenhum usuário na sessão');
+      
+      if (session?.user) {
+        console.log(`Evento ${event}: usuário autenticado, buscando progresso para:`, session.user.id);
+        fetchProgress(session.user.id);
+      } else {
+        console.log(`Evento ${event}: usuário desconectado, reset de progress`);
+        setProgress({ balance: 0, theme: 'light' });
+      }
+    });
+
+    // Cleanup do listener
+    return () => {
+      console.log('useUserSession desmontado - removendo listener de autenticação');
+      subscription.unsubscribe();
+    };
+  }, [language]);
 
   return {
     progress,

@@ -50,7 +50,7 @@ const RewardOption: React.FC<RewardOptionProps> = ({
   return (
     <div 
       key={option.id}
-      className={`p-4 border rounded-lg cursor-pointer transition-colors ${selectedReward === option.id ? 'border-sisloguin-orange bg-orange-50' : 'border-gray-200 hover:border-sisloguin-orange'}`}
+      className={`p-4 border rounded-lg cursor-pointer transition-colors ${selectedReward === option.id ? 'border-temu-orange bg-orange-50' : 'border-gray-200 hover:border-temu-orange'}`}
       onClick={() => onSelect(option.id)}
     >
       <div className="flex items-center">
@@ -81,7 +81,7 @@ const RewardOption: React.FC<RewardOptionProps> = ({
                   value={amount}
                   onChange={(e) => onAmountChange(e.target.value)}
                   onClick={handleInputClick} // Prevent event bubbling
-                  className="flex-1 border border-gray-300 rounded-r-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-sisloguin-orange"
+                  className="flex-1 border border-gray-300 rounded-r-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-temu-orange"
                   placeholder={`${t('minimumBalanceRequired')} $${option.minAmount.toFixed(2)}`}
                 />
               </div>
@@ -96,8 +96,8 @@ const RewardOption: React.FC<RewardOptionProps> = ({
                     onClick={(e) => onQuickAmountClick(quickAmount, e)} // Use the new handler with stopPropagation
                     className={`px-3 py-1 rounded-md border transition-colors ${
                       amount === quickAmount.toString() 
-                        ? 'border-sisloguin-orange bg-orange-50 text-sisloguin-orange' 
-                        : 'border-gray-200 hover:border-sisloguin-orange'
+                        ? 'border-temu-orange bg-orange-50 text-temu-orange' 
+                        : 'border-gray-200 hover:border-temu-orange'
                     }`}
                   >
                     ${quickAmount}
@@ -111,7 +111,7 @@ const RewardOption: React.FC<RewardOptionProps> = ({
                 e.stopPropagation();
                 onSubmit(e);
               }}
-              className="sisloguin-button w-full"
+              className="temu-button w-full"
             >
               {t('withdrawal')} {amount && `$${parseFloat(amount).toFixed(2)}`}
             </button>

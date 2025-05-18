@@ -1,90 +1,97 @@
-import { useState, useRef, useEffect } from 'react';
+
+import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { supabase } from '@/lib/supabase';
 
 export const usePhotoStorage = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
   const { user, updateUserAvatar } = useAuth();
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  const uploadTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Limpar timeout quando componente for desmontado
-  useEffect(() => {
-    return () => {
-      if (uploadTimeoutRef.current) {
-        clearTimeout(uploadTimeoutRef.current);
+  // Function to create the avatars bucket if it doesn't exist
+  const createAvatarBucket = async () => {
+    try {
+      // First check if bucket exists
+      const { data: buckets, error: listError } = await supabase.storage.listBuckets();
+      
+      if (listError) {
+        console.error("Error listing buckets:", listError);
+        return false;
       }
-    };
-  }, []);
-
-  // Função para definir o estado de upload com um timeout de segurança
-  const setUploadingWithSafety = (uploading: boolean) => {
-    // Limpar qualquer timeout existente
-    if (uploadTimeoutRef.current) {
-      clearTimeout(uploadTimeoutRef.current);
-      uploadTimeoutRef.current = null;
-    }
-    
-    setIsUploading(uploading);
-    
-    // Se estamos iniciando um upload, definir um timeout de segurança
-    if (uploading) {
-      uploadTimeoutRef.current = setTimeout(() => {
-        console.log("⚠️ Upload timeout - resetting state");
-        setIsUploading(false);
-        toast({
-          variant: 'destructive',
-          title: t('uploadTimeout') || 'Upload Timeout',
-          description: t('uploadTakingTooLong') || 'The upload is taking too long. Please try again.'
+      
+      const bucketExists = buckets?.some(bucket => bucket.name === 'avatars') || false;
+      
+      // If bucket doesn't exist, create it
+      if (!bucketExists) {
+        const { data, error } = await supabase.storage.createBucket('avatars', {
+          public: true,
+          fileSizeLimit: 5242880, // 5MB
         });
-      }, 15000); // 15 segundos de timeout
+        
+        if (error) {
+          console.error("Error creating bucket:", error);
+          return false;
+        }
+        
+        return true;
+      }
+      
+      return bucketExists;
+    } catch (error) {
+      console.error("Error creating bucket:", error);
+      return false;
     }
   };
 
   const handlePhotoUpload = async (imageData: string | null) => {
-    if (!imageData || !user) {
+    if (!imageData) {
       return false;
     }
     
-    setUploadingWithSafety(true);
+    if (!user) {
+      return false;
+    }
+    
+    setIsUploading(true);
     
     try {
-      console.log("Iniciando upload de foto no hook usePhotoStorage");
-      
-      // Usa o método melhorado de updateUserAvatar que agora lida com uploads base64
+      // Always use the base64 data for avatar updates
+      // This is a more reliable approach that works regardless of bucket setup
       const success = await updateUserAvatar(imageData);
       
-      console.log("Resultado do upload:", success);
-      
       if (success) {
+        // Only show success toast when we succeed
         toast({
           title: t('photoUpdated'),
           description: t('profilePhotoSuccessfullyUpdated'),
         });
       }
       
+      // Try to create the bucket for future use, but don't depend on it
+      createAvatarBucket().catch(err => {
+        // Silently log error without showing to user
+        console.warn("Failed to create bucket:", err);
+      });
+      
       return success;
     } catch (error) {
       console.error("Avatar upload error:", error);
-      // Não mostrar erro ao usuário, pois o updateUserAvatar já faz isso
+      // Don't show error to user
       return false;
     } finally {
-      setUploadingWithSafety(false);
+      setIsUploading(false);
     }
   };
   
   const handleRemovePhoto = async () => {
-    setUploadingWithSafety(true);
+    setIsUploading(true);
     
     try {
-      console.log("Iniciando remoção de foto");
-      
-      // Reset para avatar vazio
+      // Reset to default avatar or placeholder
       const success = await updateUserAvatar('');
-      
-      console.log("Resultado da remoção:", success);
       
       if (success) {
         toast({
@@ -96,9 +103,10 @@ export const usePhotoStorage = () => {
       return success;
     } catch (error) {
       console.error("Error removing avatar:", error);
+      // Don't show error to user
       return false;
     } finally {
-      setUploadingWithSafety(false);
+      setIsUploading(false);
     }
   };
 

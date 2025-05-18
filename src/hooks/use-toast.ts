@@ -1,5 +1,4 @@
 
-// This is the centralized source of truth for toast functionality
 import * as React from "react"
 
 import type {

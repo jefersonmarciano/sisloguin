@@ -1,14 +1,13 @@
-
 import { useState } from 'react';
 import { User } from '@/types/auth';
 import { supabase } from '@/integrations/supabase/client';
-import { syncUserProfileFromSession } from '@/utils/auth';
+import { syncUserProfileFromSession } from '@/utils/authUtils';
 
 export const useUserActions = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // Register new user
-  const register = async (email: string, password: string, name?: string): Promise<void> => {
+  const register = async (email: string, password: string, name?: string): Promise<User | null> => {
     try {
       setLoading(true);
       
@@ -58,7 +57,7 @@ export const useUserActions = () => {
             reviews_completed: 0,
             like_reviews_completed: 0,
             inspector_reviews_completed: 0,
-            reviews_limit: 20,
+            reviews_limit: 10,
             wheels_remaining: 3,
             theme: 'light',
             last_updated: new Date().toISOString()
@@ -66,7 +65,12 @@ export const useUserActions = () => {
         } catch (error) {
           console.error("Error initializing user progress:", error);
         }
+        
+        // Return the user profile
+        return syncUserProfileFromSession(data.user);
       }
+      
+      return null;
     } catch (e) {
       console.error("Registration error:", e);
       throw e;
@@ -76,7 +80,7 @@ export const useUserActions = () => {
   };
 
   // Login user
-  const login = async (email: string, password: string): Promise<void> => {
+  const login = async (email: string, password: string): Promise<User | null> => {
     try {
       setLoading(true);
       
@@ -89,8 +93,15 @@ export const useUserActions = () => {
       if (error) throw error;
       
       if (data.user) {
+        // If the login with Supabase was successful
         console.log("Supabase login successful:", data.user);
+        
+        // Sync the user profile
+        const userProfile = await syncUserProfileFromSession(data.user);
+        return userProfile;
       }
+      
+      return null;
     } catch (e) {
       console.error("Login error:", e);
       throw e;
@@ -103,7 +114,7 @@ export const useUserActions = () => {
   const logout = async (): Promise<void> => {
     try {
       setLoading(true);
-      // Logout from Supabase - let onAuthStateChange handle clearing user state
+      // Logout from Supabase
       await supabase.auth.signOut();
     } catch (e) {
       console.error("Logout error:", e);

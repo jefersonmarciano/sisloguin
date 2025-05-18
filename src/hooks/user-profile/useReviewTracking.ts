@@ -1,7 +1,6 @@
-
 import { useCallback } from 'react';
 import { User } from '../../types/auth';
-import { updateUserProfileData } from '@/utils/auth';
+import { updateUserProfileData } from '../../utils/authUtils';
 
 export const useReviewTracking = (user: User | null, setUser: (user: User | null) => void) => {
   // Record completed review
@@ -16,12 +15,29 @@ export const useReviewTracking = (user: User | null, setUser: (user: User | null
         updatedUser.inspectorReviewsCompleted += 1;
       }
       
+      // Atualiza o estado local
       setUser(updatedUser);
-      await updateUserProfileData(user.id, { 
-        reviewsCompleted: updatedUser.reviewsCompleted,
-        likeReviewsCompleted: updatedUser.likeReviewsCompleted,
-        inspectorReviewsCompleted: updatedUser.inspectorReviewsCompleted 
-      });
+
+      try {
+        // Atualiza no Supabase
+        await updateUserProfileData(user.id, { 
+          reviewsCompleted: updatedUser.reviewsCompleted,
+          likeReviewsCompleted: updatedUser.likeReviewsCompleted,
+          inspectorReviewsCompleted: updatedUser.inspectorReviewsCompleted 
+        });
+
+        // Atualiza o localStorage
+        const currentUser = localStorage.getItem('temuUser');
+        if (currentUser) {
+          const userData = JSON.parse(currentUser);
+          userData.reviewsCompleted = updatedUser.reviewsCompleted;
+          userData.likeReviewsCompleted = updatedUser.likeReviewsCompleted;
+          userData.inspectorReviewsCompleted = updatedUser.inspectorReviewsCompleted;
+          localStorage.setItem('temuUser', JSON.stringify(userData));
+        }
+      } catch (error) {
+        console.error('[useReviewTracking] Erro ao atualizar progresso:', error);
+      }
     }
   }, [user, setUser]);
 

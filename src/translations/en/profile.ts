@@ -1,3 +1,4 @@
+
 export default {
   profile: 'Profile',
   settings: 'Settings',
@@ -28,10 +29,4 @@ export default {
   profileManagement: 'Profile Management',
   profilePhoto: 'Profile Photo',
   accountSettings: 'Account Settings',
-  // Add new translations for timeout
-  uploadTimeout: 'Upload Timeout',
-  uploadTakingTooLong: 'The upload is taking too long. Please try again.',
-  processing: 'Processing...',
-  stillWorking: 'Still working...',
-  uploadDisabled: 'Upload disabled during processing'
 };

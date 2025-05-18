@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 interface ResultDialogProps {
   showResult: boolean;
@@ -21,10 +22,9 @@ const ResultDialog: React.FC<ResultDialogProps> = ({
   return (
     <Dialog open={showResult} onOpenChange={setShowResult}>
       <DialogContent className="bg-[#1f2937] border-[#374151] text-white rounded-lg" role="alert">
-        <DialogTitle className="sr-only">{t('congratulations')}</DialogTitle>
         <div className="flex flex-col items-center gap-4 text-center p-6">
           <div className={`bg-[#374151] p-6 rounded-full shadow-lg ${currentPrize && currentPrize > 0 ? 'animate-pulse' : ''}`}>
-            <span className={`text-3xl font-bold ${currentPrize && currentPrize >= 50 ? 'text-yellow-400' : 'text-[#f97316]'}`}>
+            <span className={`text-3xl font-bold ${currentPrize && currentPrize >= 100 ? 'text-yellow-400' : 'text-[#f97316]'}`}>
               ${currentPrize?.toFixed(2)}
             </span>
           </div>

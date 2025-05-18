@@ -1,5 +1,6 @@
+
 import en from './en/index';
-import es from './es/index';
+import es from './es';
 
 const translations = {
   en,
@@ -7,4 +8,3 @@ const translations = {
 };
 
 export default translations;
-

@@ -41,7 +41,7 @@ const MinimumEarningsDialog: React.FC<MinimumEarningsDialogProps> = ({
         </DialogHeader>
         <DialogFooter>
           <button 
-            className="sisloguin-button"
+            className="temu-button"
             onClick={() => onOpenChange(false)}
           >
             {t('gotIt')}

@@ -3,14 +3,15 @@ import { useState, useEffect } from 'react';
 import { ChatMessage, generateRandomComment, generateMultipleComments, getTotalCommentCount } from '../utils/commentGenerator';
 import { useToast } from './use-toast';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 
-// Accept isAuthenticated as a parameter instead of using useAuth
-export const useCommunityMessages = (isAuthenticated: boolean = false) => {
+export const useCommunityMessages = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [notificationHistory, setNotificationHistory] = useState<ChatMessage[]>([]);
   const [recentMessages, setRecentMessages] = useState<ChatMessage[]>([]);
   const { toast } = useToast();
   const { language } = useLanguage();
+  const { isAuthenticated } = useAuth(); // Added auth context
   const totalCommentCount = getTotalCommentCount();
   
   // Initialize with some messages when the component is mounted (only if authenticated)

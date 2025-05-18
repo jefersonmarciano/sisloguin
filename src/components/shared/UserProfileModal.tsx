@@ -66,9 +66,6 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ user, open, onClose
             </Avatar>
             {user.name}
           </DialogTitle>
-          <DialogDescription>
-            {user.rank > 0 ? `${t('rank')}: #${user.rank} - ` : ''}{t('level')}: {user.level}
-          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">
@@ -79,7 +76,7 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ user, open, onClose
             </div>
             <div>
               <div className="text-gray-500">{t('earnings')}</div>
-              <div className="font-medium text-sisloguin-orange">
+              <div className="font-medium text-temu-orange">
                 ${user.earnings.toLocaleString(language === 'en' ? 'en-US' : 'es-ES', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2

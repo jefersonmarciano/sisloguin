@@ -23,52 +23,52 @@ const SpinSessionSummary: React.FC<SpinSessionSummaryProps> = ({ results, onCont
       className="p-8 flex flex-col items-center"
     >
       <div className="bg-gradient-to-r from-[#f97316] to-[#f59e0b] h-24 w-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
-        <div className="bg-white h-20 w-20 rounded-full flex items-center justify-center">
+        <div className="bg-gray-800 h-20 w-20 rounded-full flex items-center justify-center">
           <span className="text-3xl font-bold bg-gradient-to-r from-[#f97316] to-[#f59e0b] bg-clip-text text-transparent">
             {results.length}
           </span>
         </div>
       </div>
       
-      <h2 className="text-2xl font-bold mb-2 text-gray-800">Daily Spin Used!</h2>
-      <p className="text-gray-600 mb-8 text-center">
-        You've used your daily spin.
-        Here's your result summary:
+      <h2 className="text-2xl font-bold mb-2 text-gray-100">All Spins Used!</h2>
+      <p className="text-gray-300 mb-8 text-center">
+        You've used all your spins for today.
+        Here's your wheel spinning summary:
       </p>
       
-      <div className="bg-gradient-to-r from-[#f97316]/10 to-[#f59e0b]/10 rounded-lg p-6 w-full max-w-md mb-8">
+      <div className="bg-gradient-to-r from-[#f97316]/10 to-[#f59e0b]/10 rounded-lg p-6 w-full max-w-md mb-8 border border-gray-700">
         <div className="flex justify-between items-center mb-6">
-          <span className="font-medium text-gray-700">Total Won:</span>
-          <span className="text-xl font-bold text-green-600 flex items-center gap-2">
+          <span className="font-medium text-gray-300">Total Won:</span>
+          <span className="text-xl font-bold text-green-400 flex items-center gap-2">
             ${totalWon.toFixed(2)}
-            {totalWon > 10 && <Sparkles className="h-5 w-5 text-yellow-500" />}
+            {totalWon > 20 && <Sparkles className="h-5 w-5 text-yellow-500" />}
           </span>
         </div>
         
         <div className="space-y-3">
           <div className="flex justify-between items-center">
-            <span className="font-medium text-gray-700">Spins:</span>
-            <span className="font-semibold">{results.length} completed</span>
+            <span className="font-medium text-gray-300">Spins:</span>
+            <span className="font-semibold text-gray-100">{results.length} completed</span>
           </div>
           
           <div className="flex justify-between items-center">
-            <span className="font-medium text-gray-700">Winning Spins:</span>
-            <span className="font-semibold">{wins}</span>
+            <span className="font-medium text-gray-300">Winning Spins:</span>
+            <span className="font-semibold text-gray-100">{wins}</span>
           </div>
           
           <div className="flex justify-between items-center">
-            <span className="font-medium text-gray-700">Empty Spins:</span>
-            <span className="font-semibold">{emptySpins}</span>
+            <span className="font-medium text-gray-300">Empty Spins:</span>
+            <span className="font-semibold text-gray-100">{emptySpins}</span>
           </div>
           
           <div className="flex justify-between items-center">
-            <span className="font-medium text-gray-700">Win Rate:</span>
-            <span className="font-semibold">{winRate}%</span>
+            <span className="font-medium text-gray-300">Win Rate:</span>
+            <span className="font-semibold text-gray-100">{winRate}%</span>
           </div>
           
           {bestPrize > 0 && (
             <div className="flex justify-between items-center">
-              <span className="font-medium text-gray-700">Best Prize:</span>
+              <span className="font-medium text-gray-300">Best Prize:</span>
               <span className="font-semibold text-[#f97316]">${bestPrize.toFixed(2)}</span>
             </div>
           )}
@@ -85,7 +85,7 @@ const SpinSessionSummary: React.FC<SpinSessionSummaryProps> = ({ results, onCont
         
         <button 
           onClick={() => navigate("/")}
-          className="w-full mt-3 py-3 flex justify-center items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg shadow-sm hover:bg-gray-50 transition-all duration-300"
+          className="w-full mt-3 py-3 flex justify-center items-center gap-2 bg-gray-800 border border-gray-700 text-gray-300 font-medium rounded-lg shadow-sm hover:bg-gray-700 transition-all duration-300"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Home

@@ -31,11 +31,11 @@ const RewardsRedemption: React.FC = () => {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <DollarSign className="h-6 w-6 text-sisloguin-orange mr-2" />
+          <DollarSign className="h-6 w-6 text-temu-orange mr-2" />
           <h1 className="text-2xl font-bold">{t('withdrawal')}</h1>
         </div>
-        <div className="flex items-center bg-sisloguin-lightGray px-3 py-1 rounded-full">
-          <DollarSign className="h-4 w-4 text-sisloguin-orange mr-1" />
+        <div className="flex items-center bg-temu-lightGray px-3 py-1 rounded-full">
+          <DollarSign className="h-4 w-4 text-temu-orange mr-1" />
           <span className="text-sm font-medium">${balance.toFixed(2)}</span>
         </div>
       </div>
@@ -49,7 +49,7 @@ const RewardsRedemption: React.FC = () => {
       />
       
       {/* Select Withdrawal Method */}
-      <div className="sisloguin-card mb-6">
+      <div className="temu-card mb-6">
         <h2 className="font-bold text-lg mb-4">{t('withdrawFunds')}</h2>
         
         <div className="space-y-4">

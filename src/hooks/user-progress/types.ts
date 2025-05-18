@@ -1,3 +1,4 @@
+
 import { User } from '@/types/auth';
 
 export interface UserProgress {
@@ -13,10 +14,6 @@ export interface UserProgress {
   last_updated?: string;
   last_review_reset: string | null;
   created_at?: string;
-  last_wheel_spin?: string | null;
-  wheel_cooldown_end?: string | null;
-  last_like_review?: string | null;
-  last_inspector_review?: string | null;
 }
 
 export interface UpdateResult {

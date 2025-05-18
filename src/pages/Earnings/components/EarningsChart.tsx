@@ -14,28 +14,28 @@ const EarningsChart: React.FC<EarningsChartProps> = ({ period, setPeriod, chartD
   const { t } = useLanguage();
   
   return (
-    <div className="sisloguin-card mb-6">
+    <div className="temu-card mb-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold text-lg flex items-center">
-          <BarChart className="h-5 w-5 text-sisloguin-orange mr-2" />
+          <BarChart className="h-5 w-5 text-temu-orange mr-2" />
           {t('earningsActivity')}
         </h2>
         
         <div className="flex space-x-2 text-sm">
           <button 
-            className={`px-3 py-1 rounded-full ${period === 'day' ? 'bg-sisloguin-orange text-white' : 'bg-gray-100'}`}
+            className={`px-3 py-1 rounded-full ${period === 'day' ? 'bg-temu-orange text-white' : 'bg-gray-100'}`}
             onClick={() => setPeriod('day')}
           >
             {t('day')}
           </button>
           <button 
-            className={`px-3 py-1 rounded-full ${period === 'week' ? 'bg-sisloguin-orange text-white' : 'bg-gray-100'}`}
+            className={`px-3 py-1 rounded-full ${period === 'week' ? 'bg-temu-orange text-white' : 'bg-gray-100'}`}
             onClick={() => setPeriod('week')}
           >
             {t('week')}
           </button>
           <button 
-            className={`px-3 py-1 rounded-full ${period === 'month' ? 'bg-sisloguin-orange text-white' : 'bg-gray-100'}`}
+            className={`px-3 py-1 rounded-full ${period === 'month' ? 'bg-temu-orange text-white' : 'bg-gray-100'}`}
             onClick={() => setPeriod('month')}
           >
             {t('month')}

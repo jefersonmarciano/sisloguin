@@ -1,7 +1,7 @@
 
 import { useCallback } from 'react';
 import { User } from '../../types/auth';
-import { updateUserProfileData } from '@/utils/auth';
+import { updateUserProfileData } from '../../utils/authUtils';
 
 export const useWheelTracking = (user: User | null, setUser: (user: User | null) => void) => {
   // Record a wheel spin 

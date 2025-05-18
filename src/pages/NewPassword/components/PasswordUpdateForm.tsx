@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 interface PasswordUpdateFormProps {
@@ -21,7 +21,6 @@ const PasswordUpdateForm: React.FC<PasswordUpdateFormProps> = ({ onSubmitSuccess
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,12 +66,13 @@ const PasswordUpdateForm: React.FC<PasswordUpdateFormProps> = ({ onSubmitSuccess
         description: t('passwordUpdateSuccessMessage'),
       });
       
-      // Mark as successful and show link to auth page
-      setIsSuccess(true);
-      
-      if (onSubmitSuccess) {
-        onSubmitSuccess();
-      }
+      // Redirect to login after successful password update
+      setTimeout(() => {
+        if (onSubmitSuccess) {
+          onSubmitSuccess();
+        }
+        navigate('/auth');
+      }, 2000);
     } catch (error: any) {
       console.error('Password update error:', error);
       toast({
@@ -92,57 +92,45 @@ const PasswordUpdateForm: React.FC<PasswordUpdateFormProps> = ({ onSubmitSuccess
           <CardTitle className="text-xl font-semibold">{t('updatePassword')}</CardTitle>
         </CardHeader>
         <CardContent>
-          {isSuccess ? (
-            <div className="space-y-4 text-center">
-              <p className="text-green-500 font-medium">{t('passwordUpdateSuccess')}</p>
-              <p>{t('passwordUpdateSuccessMessage')}</p>
-              <Button asChild className="w-full">
-                <Link to="/auth">{t('backToLogin')}</Link>
-              </Button>
+          <p className="mb-4">{t('enterNewPassword')}</p>
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('password')}</label>
+              <Input 
+                type="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••" 
+                disabled={isSubmitting}
+                autoFocus
+              />
             </div>
-          ) : (
-            <>
-              <p className="mb-4">{t('enterNewPassword')}</p>
-              
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">{t('password')}</label>
-                  <Input 
-                    type="password" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••" 
-                    disabled={isSubmitting}
-                    autoFocus
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-1">{t('confirmPassword')}</label>
-                  <Input 
-                    type="password" 
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="••••••••" 
-                    disabled={isSubmitting}
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full bg-green-500 hover:bg-green-600" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {t('updating')}
-                    </>
-                  ) : t('updatePassword')}
-                </Button>
-              </form>
-            </>
-          )}
+            
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('confirmPassword')}</label>
+              <Input 
+                type="password" 
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="••••••••" 
+                disabled={isSubmitting}
+              />
+            </div>
+            
+            <Button 
+              type="submit" 
+              className="w-full bg-green-500 hover:bg-green-600" 
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {t('updating')}
+                </>
+              ) : t('updatePassword')}
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>

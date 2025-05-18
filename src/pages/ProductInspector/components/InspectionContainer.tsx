@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useIsMobile } from '../../../hooks/use-mobile';
@@ -30,7 +29,7 @@ const InspectionContainer: React.FC<InspectionContainerProps> = ({
   }
 
   return (
-    <div className="p-4 md:p-6">
+    <div className="bg-gray-800 rounded-xl shadow-md p-6 border border-gray-700">
       <ProductInspectionForm
         product={currentProduct}
         onSafe={onSafe}

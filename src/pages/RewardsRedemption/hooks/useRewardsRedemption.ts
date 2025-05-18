@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useToast } from '../../../hooks/use-toast';
 import { useAuth } from '../../../contexts/AuthContext';
@@ -58,51 +57,33 @@ export const useRewardsRedemption = (rewardOptions: RewardOption[]) => {
     setAmount(quickAmount.toString());
   };
   
-  const handleSubmit = (e: React.MouseEvent) => {
+  const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     
-    if (!selectedReward || !amount) {
+    if (!selectedReward) {
       toast({
-        title: "Error",
-        description: "Please select a withdrawal option and enter an amount",
+        title: "No reward selected",
+        description: "Please select a reward option first",
         variant: "destructive",
       });
       return;
     }
     
-    const rewardAmount = parseFloat(amount);
-    if (isNaN(rewardAmount) || rewardAmount <= 0) {
+    if (!amount || isNaN(Number(amount))) {
       toast({
-        title: "Error",
+        title: "Invalid amount",
         description: "Please enter a valid amount",
         variant: "destructive",
       });
       return;
     }
     
-    // Check if user has earned at least $1000 to be eligible for withdrawal
-    if (!hasMinimumEarnings) {
-      // Show dialog instead of just a toast
-      setShowEarningsDialog(true);
-      return;
-    }
-    
-    // Check if user can withdraw this amount
-    const withdrawalCheck = canWithdraw(rewardAmount);
-    
-    if (!withdrawalCheck.allowed) {
-      toast({
-        title: "Withdrawal not allowed",
-        description: withdrawalCheck.reason || "You cannot withdraw at this time",
-        variant: "destructive",
-      });
-      return;
-    }
+    const rewardAmount = Number(amount);
     
     if (rewardAmount > balance) {
       toast({
         title: "Insufficient balance",
-        description: "You don't have enough funds for this withdrawal",
+        description: `You only have $${balance.toFixed(2)} available`,
         variant: "destructive",
       });
       return;
@@ -118,24 +99,33 @@ export const useRewardsRedemption = (rewardOptions: RewardOption[]) => {
       return;
     }
     
-    // Process withdrawal
-    updateBalance(-rewardAmount); // Subtract amount from balance
-    
-    // Add transaction with negative amount to represent withdrawal
-    addTransaction({
-      amount: -rewardAmount,
-      type: 'withdraw',
-      status: 'completed'
-    });
-    
-    toast({
-      title: "Withdrawal requested",
-      description: `Your withdrawal for $${rewardAmount.toFixed(2)} to ${selectedOption?.type} has been submitted!`,
-    });
-    
-    // Reset form
-    setSelectedReward(null);
-    setAmount('');
+    try {
+      // Process withdrawal
+      updateBalance(-rewardAmount); // Subtract amount from balance
+      
+      // Add transaction with negative amount to represent withdrawal
+      await addTransaction({
+        amount: -rewardAmount,
+        type: 'withdraw',
+        status: 'completed'
+      });
+      
+      toast({
+        title: "Withdrawal requested",
+        description: `Your withdrawal for $${rewardAmount.toFixed(2)} to ${selectedOption?.type} has been submitted!`,
+      });
+      
+      // Reset form
+      setSelectedReward(null);
+      setAmount('');
+    } catch (error) {
+      console.error('Error processing withdrawal:', error);
+      toast({
+        title: "Error",
+        description: "Failed to process withdrawal. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
   
   // Filter withdrawal history

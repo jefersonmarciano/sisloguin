@@ -8,9 +8,9 @@ const SystemNotifications: React.FC = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="sisloguin-card">
+    <div className="temu-card">
       <div className="flex items-center space-x-2 mb-4">
-        <Bell className="h-5 w-5 text-sisloguin-orange" />
+        <Bell className="h-5 w-5 text-temu-orange" />
         <h2 className="font-medium">{t('recentNotifications')}</h2>
       </div>
       
@@ -20,7 +20,7 @@ const SystemNotifications: React.FC = () => {
             <div>
               <div className="flex items-center space-x-2">
                 <h3 className="text-sm font-medium">{t('newRewardEarned')}</h3>
-                <Badge variant="default" className="bg-sisloguin-orange text-[10px]">{t('new')}</Badge>
+                <Badge variant="default" className="bg-temu-orange text-[10px]">{t('new')}</Badge>
               </div>
               <p className="text-xs text-gray-600 mt-1">{t('earnedFromLuckyWheel')}</p>
             </div>

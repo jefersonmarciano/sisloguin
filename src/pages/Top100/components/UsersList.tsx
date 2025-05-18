@@ -64,7 +64,7 @@ const UsersList = ({
             variant="outline" 
             size="sm" 
             onClick={loadMoreUsers}
-            className="text-sisloguin-orange border-sisloguin-orange hover:bg-orange-50"
+            className="text-temu-orange border-temu-orange hover:bg-orange-50"
           >
             {t('viewAll')}
           </Button>

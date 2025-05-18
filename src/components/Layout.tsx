@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
@@ -13,7 +12,7 @@ const Layout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-gray-900 text-white">
       <Header mobileMenuOpen={mobileMenuOpen} toggleMobileMenu={toggleMobileMenu} />
       
       <main className="flex-grow px-4 py-4 pb-20 animate-fade-in max-w-md mx-auto w-full">

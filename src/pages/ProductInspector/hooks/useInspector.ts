@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useEarnings } from '../../../contexts/EarningsContext';
@@ -56,9 +55,20 @@ export const useInspector = (products: MultiLanguageProduct[]) => {
   // Check if daily limit is reached
   useEffect(() => {
     if (reviewsCompleted >= reviewsLimit) {
-      setShowCooldown(true);
+      if (user?.lastReviewReset) {
+        const lastReset = new Date(user.lastReviewReset);
+        const endTime = lastReset.getTime() + (24 * 60 * 60 * 1000);
+        const now = Date.now();
+        if (now < endTime) {
+          setShowCooldown(true);
+        } else {
+          checkAndResetReviews();
+        }
+      } else {
+        setShowCooldown(true);
+      }
     }
-  }, [reviewsCompleted]);
+  }, [reviewsCompleted, user?.lastReviewReset, checkAndResetReviews]);
 
   useEffect(() => {
     // Check if reviews need to be reset when component loads
@@ -102,7 +112,7 @@ export const useInspector = (products: MultiLanguageProduct[]) => {
     if (!currentProduct) return;
     
     // Updated rewards between 3-7 dollars
-    const reward = hasIssues ? 6.50 : 3.25;
+    const reward = hasIssues ? 3.25 : 1.625;
     const correct = hasIssues;
     
     setEarnedToday((prev) => prev + reward);

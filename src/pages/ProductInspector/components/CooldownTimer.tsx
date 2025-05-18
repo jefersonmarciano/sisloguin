@@ -1,33 +1,23 @@
 import React from 'react';
-import CooldownTimer from '@/components/common/CooldownTimer';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '../../../contexts/LanguageContext';
+import BaseCooldownTimer from '../../../components/cooldown/BaseCooldownTimer';
 
 interface CooldownTimerProps {
   hoursToWait: number;
   onComplete: () => void;
-  debug?: boolean;
 }
 
-const ProductInspectorCooldownTimer: React.FC<CooldownTimerProps> = ({ 
-  hoursToWait, 
-  onComplete,
-  debug = false
-}) => {
+const CooldownTimer: React.FC<CooldownTimerProps> = ({ hoursToWait = 24, onComplete }) => {
   const { t } = useLanguage();
-  
+
   return (
-    <CooldownTimer
+    <BaseCooldownTimer
       hoursToWait={hoursToWait}
       onComplete={onComplete}
-      storageKey="inspectorCooldownEnd"
-      dbField="last_inspector_review"
-      dbCooldownEndField="inspector_cooldown_end"
       title={t('dailyLimitReached')}
-      message={t('youveCompletedAllInspections')}
-      color="blue"
-      debug={debug}
+      description={t('inspectorLimitDescription')}
     />
   );
 };
 
-export default ProductInspectorCooldownTimer;
+export default CooldownTimer;

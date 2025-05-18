@@ -1,24 +1,20 @@
-
 import React from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import MessageItem from './MessageItem';
-import { ChatMessage } from '../../../utils/commentGenerator';
 
 interface MessageListProps {
-  messages: ChatMessage[];
+  messages: any[];
   formatTimestamp: (date: Date) => string;
   handleLikeMessage: (messageId: string) => void;
-  likedMessages: Record<string, boolean>;
   onReply: (messageId: string) => void;
   replyingTo: string | null;
-  onUserClick?: (message: ChatMessage) => void;
+  onUserClick?: (message: any) => void;
 }
 
 const MessageList: React.FC<MessageListProps> = ({
   messages,
   formatTimestamp,
   handleLikeMessage,
-  likedMessages,
   onReply,
   replyingTo,
   onUserClick
@@ -37,7 +33,7 @@ const MessageList: React.FC<MessageListProps> = ({
             key={message.id}
             message={message}
             formatTimestamp={formatTimestamp}
-            liked={!!likedMessages[message.id]}
+            liked={false} // You can implement proper like tracking later
             onLike={() => handleLikeMessage(message.id)}
             onReply={() => onReply(message.id)}
             replying={replyingTo === message.id}

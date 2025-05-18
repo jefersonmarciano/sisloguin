@@ -1,21 +1,25 @@
 
-import React from 'react';
-import { useRequireAuth } from '@/hooks/useRequireAuth';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePasswordRecovery } from './hooks/usePasswordRecovery';
 import PasswordUpdateForm from './components/PasswordUpdateForm';
 import ProcessingState from './components/ProcessingState';
 import RedirectNotice from './components/RedirectNotice';
 
 const NewPassword: React.FC = () => {
-  // We don't redirect in this component as it needs to be accessible
-  // for both authenticated and unauthenticated users during password recovery
-  const { isInitializing } = useRequireAuth({ redirectIfAuthenticated: false });
   const { isPasswordRecovery, isProcessingToken } = usePasswordRecovery();
+  const navigate = useNavigate();
   
-  // If still initializing auth, don't render anything yet
-  if (isInitializing) {
-    return <ProcessingState />;
-  }
+  // If not in password recovery mode, redirect to auth
+  useEffect(() => {
+    if (!isPasswordRecovery && !isProcessingToken) {
+      const timer = setTimeout(() => {
+        navigate('/auth');
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isPasswordRecovery, isProcessingToken, navigate]);
 
   // If still processing token, show loading state
   if (isProcessingToken) {
@@ -23,7 +27,7 @@ const NewPassword: React.FC = () => {
   }
 
   // If not in password recovery mode, show redirect notice
-  if (!isPasswordRecovery) {
+  if (!isPasswordRecovery && !isProcessingToken) {
     return <RedirectNotice />;
   }
 

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '../../../lib/utils';
 
@@ -11,7 +10,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ completed, limit }) => {
   const completionPercentage = Math.min((completed / limit) * 100, 100);
   
   return (
-    <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+    <div className="w-full h-3 bg-gray-700 rounded-full overflow-hidden">
       <div 
         className={cn(
           "h-full rounded-full transition-all duration-500",

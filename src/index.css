@@ -90,7 +90,7 @@
   }
   
   body {
-    @apply bg-background text-foreground;
+    background-color: black;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
@@ -114,20 +114,20 @@
 }
 
 @layer components {
-  .sisloguin-button {
-    @apply bg-sisloguin-orange text-white font-medium rounded-full px-6 py-2 transition-all duration-300 hover:bg-green-600 hover:shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-300;
+  .temu-button {
+    @apply bg-temu-orange text-white font-medium rounded-full px-6 py-2 transition-all duration-300 hover:bg-green-600 hover:shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-300;
   }
   
-  .sisloguin-card {
+  .temu-card {
     @apply bg-white rounded-xl shadow-md p-4 border border-gray-100 hover:shadow-lg transition-shadow duration-300;
   }
   
-  .sisloguin-progress-bar {
-    @apply h-2 bg-sisloguin-lightGray rounded-full overflow-hidden;
+  .temu-progress-bar {
+    @apply h-2 bg-temu-lightGray rounded-full overflow-hidden;
   }
   
-  .sisloguin-progress-fill {
-    @apply h-full bg-sisloguin-orange rounded-full transition-all duration-500;
+  .temu-progress-fill {
+    @apply h-full bg-temu-orange rounded-full transition-all duration-500;
   }
   
   .language-selector {
@@ -139,7 +139,7 @@
   }
   
   .language-option.active {
-    @apply bg-sisloguin-orange text-white;
+    @apply bg-temu-orange text-white;
   }
   
   .nav-link {
@@ -147,7 +147,7 @@
   }
   
   .nav-link.active {
-    @apply text-sisloguin-orange;
+    @apply text-temu-orange;
   }
   
   /* New Components */
@@ -156,7 +156,7 @@
   }
   
   .cta-button {
-    @apply bg-gradient-to-r from-sisloguin-orange to-green-600 text-white font-medium rounded-full px-8 py-3 transition-all duration-300 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-300 text-center;
+    @apply bg-gradient-to-r from-temu-orange to-green-600 text-white font-medium rounded-full px-8 py-3 transition-all duration-300 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-300 text-center;
   }
   
   .section-title {
@@ -224,4 +224,18 @@
   .glass-effect {
     @apply bg-white bg-opacity-80 backdrop-blur-sm;
   }
+}
+
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }

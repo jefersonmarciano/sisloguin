@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -66,7 +67,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				sisloguin: {
+				temu: {
 					orange: '#4CAF50', // Changed from #F97316 to green
 					gray: '#8E9196',
 					lightGray: '#F3F3F3',

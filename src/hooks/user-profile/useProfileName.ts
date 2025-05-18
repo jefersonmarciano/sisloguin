@@ -1,62 +1,63 @@
-
 import { useCallback } from 'react';
 import { User } from '../../types/auth';
 import { supabase } from '../../lib/supabase';
-import { updateUserProfileData } from '@/utils/auth';
+import { updateUserProfileData } from '../../utils/authUtils';
 
-export const useProfileName = (user: User | null, setUser: (user: User | null) => void) => {
-  // Update user profile information in Supabase and locally
-  const updateUserProfile = useCallback(async (name: string, email: string): Promise<boolean> => {
-    try {
-      if (!user) return false;
-      
-      let success = true;
-      let updatedUser = { ...user };
-      
-      // Only update email if it has changed
-      if (email !== user.email) {
-        try {
-          const { data, error } = await supabase.auth.updateUser({
-            email: email
-          });
-          
-          if (error) {
-            console.warn("Email update failed:", error);
-            // Continue with other updates even if email update fails
-          } else {
-            updatedUser.email = email;
-          }
-        } catch (err) {
-          console.warn("Email update error:", err);
-          // Continue with other updates even if email update fails
-        }
-      }
-      
-      // Update user metadata with the name
+export const useProfileName = (
+  user: User | null,
+  setUser: (user: User | null) => void,
+  refreshUserProfile: () => Promise<void>
+) => {
+  const updateUserProfile = useCallback(
+    async (name: string, email: string): Promise<boolean> => {
       try {
-        const { data: metaData, error: metaError } = await supabase.auth.updateUser({
-          data: { name: name }
-        });
-        
-        if (metaError) {
-          console.warn("Name update in metadata failed:", metaError);
+        if (!user) return false;
+
+        let updatedUser = { ...user };
+
+        // Only update email if it has changed
+        if (email !== user.email) {
+          const { error } = await supabase.auth.updateUser({ email });
+          if (error) throw error;
+          updatedUser.email = email;
         }
-      } catch (err) {
-        console.warn("Name update in metadata error:", err);
+
+        // Update user metadata with name
+        const { error: metaError } = await supabase.auth.updateUser({
+          data: { name }
+        });
+        if (metaError) throw metaError;
+
+        // Update name in local state
+        updatedUser.fullName = name;
+        updatedUser.name = name;
+
+        // Update the profiles table
+        console.log("Updating profile in DB:", updatedUser);
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .update({ full_name: name })
+          .eq('id', user.id);
+        if (profileError) console.warn("DB update failed:", profileError);
+
+        // Optional: update secondary source (if needed)
+        await updateUserProfileData(user.id, {
+          fullName: name,
+          name,
+          email: updatedUser.email
+        });
+
+        // Refresh full profile from Supabase
+        await refreshUserProfile(user.id, setUser);
+
+        return true;
+      } catch (error) {
+        console.error("Error updating profile:", error);
+        return false;
       }
-      
-      // Always update name in our local user object
-      updatedUser.name = name;
-      
-      // Update the profile in the profiles table and localStorage
-      setUser(updatedUser);
-      return await updateUserProfileData(user.id, { name, email: updatedUser.email });
-      
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      return false;
-    }
-  }, [user, setUser]);
+    },
+    [user, setUser, refreshUserProfile]
+  );
 
   return { updateUserProfile };
 };

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -25,7 +24,7 @@ const activities = [
     id: 1,
     title: 'likeForMoney',
     icon: <Star className="h-5 w-5 text-white" />,
-    color: 'bg-sisloguin-orange',
+    color: 'bg-temu-orange',
     route: '/like-for-money',
   },
   {
@@ -115,26 +114,24 @@ const Dashboard: React.FC = () => {
   return (
     <div className="animate-fade-in space-y-6">
       {/* Welcome Section */}
-      <div className="sisloguin-card">
+      <div className="temu-card bg-gray-800 text-white">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">{t('welcome')}</h1>
         </div>
-        
         <div>
           <div className="mb-4">
             <div className="flex justify-between text-sm mb-1">
               <span>{t('reviewsCompleted')}</span>
               <span>{user.reviewsCompleted} / {user.reviewsLimit}</span>
             </div>
-            <div className="sisloguin-progress-bar">
+            <div className="temu-progress-bar">
               <div 
-                className="sisloguin-progress-fill" 
+                className="temu-progress-fill" 
                 style={{ width: `${(user.reviewsCompleted / user.reviewsLimit) * 100}%` }}
               ></div>
             </div>
           </div>
-          
-          <div className="text-sm text-gray-500 space-y-1">
+          <div className="text-sm text-gray-400 space-y-1">
             <div className="flex justify-between">
               <span>{t('likeForMoney')}:</span>
               <span>{user.likeReviewsCompleted} / 10</span>
@@ -148,10 +145,10 @@ const Dashboard: React.FC = () => {
       </div>
       
       {/* Daily Tasks Section */}
-      <div className="sisloguin-card">
+      <div className="temu-card bg-gray-800 text-white">
         <div className="flex justify-between items-center mb-4">
           <h2 className="font-bold text-lg">{t('dailyTasks')}</h2>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-400">
             {t('dailyLimit')}: 20
           </div>
         </div>
@@ -164,7 +161,7 @@ const Dashboard: React.FC = () => {
               className={`${activity.color} rounded-lg p-3 text-white hover:shadow-md hover:opacity-90 transition-all duration-300`}
             >
               <div className="flex items-center mb-3">
-                <div className="p-2 rounded-full bg-white/20 mr-3">
+                <div className="p-2 rounded-full bg-gray-900 mr-3">
                   {activity.icon}
                 </div>
                 <div className="font-medium">{t(activity.title)}</div>
@@ -175,7 +172,7 @@ const Dashboard: React.FC = () => {
                     <span className="text-xs">{t('needHelp')}</span>
                   )}
                 </div>
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 text-white" />
               </div>
             </Link>
           ))}
@@ -183,41 +180,41 @@ const Dashboard: React.FC = () => {
       </div>
       
       {/* Community Section */}
-      <div className="sisloguin-card">
+      <div className="temu-card bg-gray-800 text-white">
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
-            <Users className="h-5 w-5 text-sisloguin-orange mr-2" />
+            <Users className="h-5 w-5 text-temu-orange mr-2" />
             <h2 className="font-bold text-lg">{t('community')}</h2>
           </div>
-          <Link to="/top100" className="text-sisloguin-orange flex items-center text-sm">
+          <Link to="/top100" className="text-temu-orange flex items-center text-sm">
             {t('top100')}
-            <ChevronRight className="h-4 w-4 ml-1" />
+            <ChevronRight className="h-4 w-4 ml-1 text-temu-orange" />
           </Link>
         </div>
         
         <div className="space-y-3">
           {recentMessages.map((msg) => (
-            <div key={msg.id} className="p-3 bg-gray-50 rounded-lg">
+            <div key={msg.id} className="p-3 bg-gray-900 rounded-lg">
               <div 
                 className="flex items-center mb-2 cursor-pointer"
                 onClick={() => handleUserClick(msg)}
               >
                 <img src={msg.user.avatar} alt="User" className="h-8 w-8 rounded-full mr-2" />
                 <div>
-                  <div className="font-medium text-sm">{msg.user.name}</div>
-                  <div className="text-xs text-gray-500">{formatTimestamp(msg.timestamp)}</div>
+                  <div className="font-medium text-sm text-white">{msg.user.name}</div>
+                  <div className="text-xs text-gray-400">{formatTimestamp(msg.timestamp)}</div>
                 </div>
               </div>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-gray-300">
                 {msg.text}
               </p>
             </div>
           ))}
           
           <div className="text-center mt-2">
-            <Link to="/community-chat" className="text-sm text-sisloguin-orange flex justify-center items-center">
+            <Link to="/community-chat" className="text-sm text-temu-orange flex justify-center items-center">
               {t('seeMoreConversations')}
-              <ChevronRight className="h-4 w-4 ml-1" />
+              <ChevronRight className="h-4 w-4 ml-1 text-temu-orange" />
             </Link>
           </div>
         </div>
