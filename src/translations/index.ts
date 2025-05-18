@@ -1,6 +1,6 @@
 import en from './en/index';
 import es from './es';
-import fr from './fr/features';
+import fr from './fr';
 
 const translations = {
   en,
