@@ -1,4 +1,3 @@
-
 export interface ChatUser {
   id: string;
   name: string;
@@ -8,15 +7,17 @@ export interface ChatUser {
 
 export interface ChatMessage {
   id: string;
-  user: ChatUser;
   text: string;
-  timestamp: Date;
+  user: {
+    id: string;
+    name: string;
+    avatar: string;
+  };
+  timestamp: number;
   likes: number;
-  isLiked?: boolean;
-  parentId?: string | null;
-  replies?: ChatMessage[];
-  isHighlighted?: boolean;
-  language: 'en' | 'es';
+  is_highlighted: boolean;
+  is_translated: boolean;
+  language: string;
 }
 
 export interface ChatReaction {
@@ -32,10 +33,10 @@ export interface UserProfileInfo {
   name: string;
   avatar: string;
   earnings: number;
-  level: number;
   country: string;
-  location?: string;
   registrationDate: Date;
+  location: string;
+  level: number;
   withdrawals: UserWithdrawal[];
 }
 
@@ -43,6 +44,6 @@ export interface UserWithdrawal {
   id: string;
   userId: string;
   amount: number;
-  status: 'completed' | 'pending' | 'failed';
+  status: 'pending' | 'completed' | 'failed';
   createdAt: Date;
 }

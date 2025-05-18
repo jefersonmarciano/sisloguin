@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, toggleMobileMenu }) => 
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
             <img 
-              src="https://centermoneyguard.com/upload/logo.png" 
+              src="../public/logo.png" 
               alt="App Profit Logo" 
               className="h-16" 
             />

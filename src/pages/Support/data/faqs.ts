@@ -1,4 +1,3 @@
-
 import { FAQItem } from '../types';
 
 // FAQ data with translations
@@ -10,8 +9,8 @@ const faqs: FAQItem[] = [
       es: '¿Cómo puedo empezar a ganar dinero en esta plataforma?'
     },
     answer: {
-      en: 'Getting started is easy! You can earn money through three main activities: (1) "Like for Money" - review products and earn $3.75-$5.50 per review, (2) "Product Inspector" - inspect products for safety issues and earn $3.25-$6.50 per inspection, and (3) "Lucky Wheel" - spin the wheel daily for chances to win up to $100 per spin. Simply click on any of these activities from the home page to begin earning immediately!',
-      es: '¡Comenzar es fácil! Puedes ganar dinero a través de tres actividades principales: (1) "Me gusta por dinero" - revisa productos y gana $3.75-$5.50 por revisión, (2) "Inspector de productos" - inspecciona productos por problemas de seguridad y gana $3.25-$6.50 por inspección, y (3) "Rueda de la suerte" - gira la rueda diariamente para tener la oportunidad de ganar hasta $100 por giro. ¡Simplemente haz clic en cualquiera de estas actividades desde la página de inicio para comenzar a ganar inmediatamente!'
+      en: 'Getting started is easy! You can earn money through three main activities: (1) "Like for Money" - review products and earn $1.875-$2.75 per review, (2) "Product Inspector" - inspect products for safety issues and earn $1.00-$4.00 per inspection, and (3) "Lucky Wheel" - spin the wheel daily for chances to win up to $25 per spin. Simply click on any of these activities from the home page to begin earning immediately!',
+      es: '¡Comenzar es fácil! Puedes ganar dinero a través de tres actividades principales: (1) "Me gusta por dinero" - revisa productos y gana $1.875-$2.75 por revisión, (2) "Inspector de productos" - inspecciona productos por problemas de seguridad y gana $1.00-$4.00 por inspección, y (3) "Rueda de la suerte" - gira la rueda diariamente para tener la oportunidad de ganar hasta $25 por giro. ¡Simplemente haz clic en cualquiera de estas actividades desde la página de inicio para comenzar a ganar inmediatamente!'
     }
   },
   {

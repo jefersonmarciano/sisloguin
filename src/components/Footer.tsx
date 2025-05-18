@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-900 border-t border-gray-800 pt-8 pb-20 px-4 mt-auto">
       <div className="max-w-md mx-auto">
         <div className="mb-6 text-center">
-          <img 
-            src="https://centermoneyguard.com/upload/logo.png" 
+            <img 
+              src="../public/logo.png" 
             alt="App Profit Logo" 
             className="h-16 mx-auto brightness-90 contrast-125" 
           />

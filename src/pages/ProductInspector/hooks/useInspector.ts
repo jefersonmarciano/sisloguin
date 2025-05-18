@@ -83,7 +83,7 @@ export const useInspector = (products: MultiLanguageProduct[]) => {
     if (!currentProduct) return;
     
     // Updated rewards between 3-7 dollars
-    const reward = hasIssues ? 3.25 : 6.50;
+    const reward = hasIssues ? 2.00 : 4.00;
     const correct = !hasIssues;
     
     setEarnedToday((prev) => prev + reward);
@@ -112,7 +112,7 @@ export const useInspector = (products: MultiLanguageProduct[]) => {
     if (!currentProduct) return;
     
     // Updated rewards between 3-7 dollars
-    const reward = hasIssues ? 3.25 : 1.625;
+    const reward = hasIssues ? 2.00 : 1.00;
     const correct = hasIssues;
     
     setEarnedToday((prev) => prev + reward);

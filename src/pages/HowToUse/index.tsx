@@ -55,7 +55,7 @@ const HowToUse: React.FC = () => {
                 <p className="text-gray-600 mt-1">
                   {step === 1 && 'Find products you like and evaluate them by answering simple questions.'}
                   {step === 2 && 'Help us keep the marketplace safe by identifying suspicious products.'}
-                  {step === 3 && 'Spin the wheel daily for a chance to win bonus rewards!'}
+                  {step === 3 && 'wheel daily for a chance to win bonus rewards!'}
                   {step === 4 && 'Cash out your earnings to PayPal or convert to gift cards.'}
                 </p>
               </div>

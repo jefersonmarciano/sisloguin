@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 
@@ -18,7 +17,11 @@ const EarningsStatus: React.FC<EarningsStatusProps> = ({
   const { t } = useLanguage();
 
   return (
-    <div className={`mb-4 p-4 rounded-lg ${hasMinimumEarnings ? 'bg-green-50 text-green-700' : 'bg-yellow-50 text-yellow-700'}`}>
+    <div className={`mb-4 p-4 rounded-lg ${
+      hasMinimumEarnings 
+        ? 'bg-green-900/50 text-green-400 border border-green-700' 
+        : 'bg-yellow-900/50 text-yellow-400 border border-yellow-700'
+    }`}>
       <div className="font-medium">
         {hasMinimumEarnings 
           ? t('eligibleForWithdrawal')

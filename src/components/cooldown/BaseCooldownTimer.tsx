@@ -54,41 +54,41 @@ const BaseCooldownTimer: React.FC<BaseCooldownTimerProps> = ({
   const progressPercentage = Math.max(0, 100 - (totalSeconds / maxSeconds) * 100);
 
   return (
-    <div className="p-8 flex flex-col items-center">
-      <div className="bg-orange-100 h-24 w-24 rounded-full flex items-center justify-center mb-6">
-        <Clock className="h-12 w-12 text-temu-orange" />
+    <div className="p-8 flex flex-col items-center bg-gray-800/50 border border-gray-700 rounded-lg">
+      <div className="bg-orange-900/20 h-24 w-24 rounded-full flex items-center justify-center mb-6 border border-orange-700/50">
+        <Clock className="h-12 w-12 text-orange-400" />
       </div>
 
-      <h2 className="text-xl font-bold mb-2">{title || t('dailyLimitReached')}</h2>
-      <p className="text-gray-600 mb-8 text-center">
+      <h2 className="text-xl font-bold mb-2 text-gray-100">{title || t('dailyLimitReached')}</h2>
+      <p className="text-gray-400 mb-8 text-center">
         {description || t('dailyLimitDescription')}
       </p>
 
       <div className="grid grid-cols-3 gap-4 mb-6 w-full max-w-xs">
-        <div className="bg-gray-100 rounded-lg p-3 text-center">
-          <span className="block text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span>
-          <span className="text-xs text-gray-500">{t('hours')}</span>
+        <div className="bg-gray-700 rounded-lg p-3 text-center border border-gray-600">
+          <span className="block text-2xl font-bold text-gray-100">{String(timeLeft.hours).padStart(2, '0')}</span>
+          <span className="text-xs text-gray-400">{t('hours')}</span>
         </div>
-        <div className="bg-gray-100 rounded-lg p-3 text-center">
-          <span className="block text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span>
-          <span className="text-xs text-gray-500">{t('minutes')}</span>
+        <div className="bg-gray-700 rounded-lg p-3 text-center border border-gray-600">
+          <span className="block text-2xl font-bold text-gray-100">{String(timeLeft.minutes).padStart(2, '0')}</span>
+          <span className="text-xs text-gray-400">{t('minutes')}</span>
         </div>
-        <div className="bg-gray-100 rounded-lg p-3 text-center">
-          <span className="block text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span>
-          <span className="text-xs text-gray-500">{t('seconds')}</span>
+        <div className="bg-gray-700 rounded-lg p-3 text-center border border-gray-600">
+          <span className="block text-2xl font-bold text-gray-100">{String(timeLeft.seconds).padStart(2, '0')}</span>
+          <span className="text-xs text-gray-400">{t('seconds')}</span>
         </div>
       </div>
 
-      <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+      <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden border border-gray-600">
         <div
-          className="h-full bg-temu-orange transition-all duration-1000"
+          className="h-full bg-orange-500 transition-all duration-1000"
           style={{ width: `${progressPercentage}%` }}
         />
       </div>
 
       {showBackButton && onBackClick && (
         <button
-          className="mt-8 flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+          className="mt-8 flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 text-gray-100"
           onClick={onBackClick}
         >
           <ArrowLeft className="h-4 w-4" />

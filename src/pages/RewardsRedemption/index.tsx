@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { DollarSign } from 'lucide-react';
@@ -28,15 +27,15 @@ const RewardsRedemption: React.FC = () => {
   } = useRewardsRedemption(rewardOptions);
   
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in bg-gray-800/50 text-gray-100">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
           <DollarSign className="h-6 w-6 text-temu-orange mr-2" />
           <h1 className="text-2xl font-bold">{t('withdrawal')}</h1>
         </div>
-        <div className="flex items-center bg-temu-lightGray px-3 py-1 rounded-full">
+        <div className="flex items-center bg-gray-700 px-3 py-1 rounded-full">
           <DollarSign className="h-4 w-4 text-temu-orange mr-1" />
-          <span className="text-sm font-medium">${balance.toFixed(2)}</span>
+          <span className="text-sm font-medium text-gray-100">${balance.toFixed(2)}</span>
         </div>
       </div>
       
@@ -49,8 +48,8 @@ const RewardsRedemption: React.FC = () => {
       />
       
       {/* Select Withdrawal Method */}
-      <div className="temu-card mb-6">
-        <h2 className="font-bold text-lg mb-4">{t('withdrawFunds')}</h2>
+      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 mb-6">
+        <h2 className="font-bold text-lg mb-4 text-gray-100">{t('withdrawFunds')}</h2>
         
         <div className="space-y-4">
           {rewardOptions.map((option) => (

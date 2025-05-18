@@ -26,7 +26,7 @@ export default {
   tryAgain: 'Try Again',
   betterLuckNextTime: 'Better luck next time!',
   spinToWin: 'Spin to Win!',
-  spinTheWheel: 'Spin the wheel for up to $100!',
+  spinTheWheel: 'Spin the wheel for up to $25!',
   potentialEarnings: 'Potential earnings',
   upTo: 'up to',
   daily: 'daily',
@@ -81,6 +81,6 @@ export default {
   // Adicionando as novas traduções para as spins
   todaysSpins: 'Today\'s Spins',
   remaining: 'remaining',
-  earnPerSpin: 'Earn $1.5-$50.00 per spin',
-  potentialEarningsDaily: 'Potential earnings: up to $100.00 daily'
+  earnPerSpin: 'Earn $0.75-$25.00 per spin',
+  potentialEarningsDaily: 'Potential earnings: up to $75.00 daily'
 };

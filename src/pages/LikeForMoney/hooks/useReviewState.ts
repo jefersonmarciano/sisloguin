@@ -93,7 +93,7 @@ export const useReviewState = () => {
   
   const handleLike = () => {
     // Updated reward value between 3-7 dollars
-    const reward = 2.75;
+    const reward = 1.50; // $1.50 por like
     setEarnedToday((prev) => prev + reward);
     setResults(prev => [...prev, {type: 'like', reward}]);
     
@@ -117,7 +117,7 @@ export const useReviewState = () => {
   
   const handleDislike = () => {
     // Updated reward value between 3-7 dollars
-    const reward = 1.875;
+    const reward = 1.00; // $1.00 por dislike
     setEarnedToday((prev) => prev + reward);
     setResults(prev => [...prev, {type: 'dislike', reward}]);
     
