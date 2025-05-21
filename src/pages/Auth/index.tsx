@@ -110,23 +110,27 @@ const Auth = () => {
 
   // Handle login submission
   const handleLogin = async (email: string, password: string): Promise<void> => {
-    const { user, error } = await login(email, password);
-    if (user?.id && !error) {
-      await fetchAndSaveCountryInfo(user.id);
+    try {
+      await login(email, password);
       navigate('/dashboard');
+    } catch (error) {
+      // Error is already handled by the login function
+      console.error('Login failed:', error);
     }
   };
 
   // Handle register submission
   const handleRegister = async (name: string, email: string, password: string, confirmPassword: string): Promise<void> => {
-    const { user, error } = await register(email, password, name);
-    if (user?.id && !error) {
-      await fetchAndSaveCountryInfo(user.id);
+    try {
+      await register(email, password, name);
       toast({
         title: 'Registration successful',
         description: 'Welcome to App Profit!'
       });
       navigate('/dashboard');
+    } catch (error) {
+      // Error is already handled by the register function
+      console.error('Registration failed:', error);
     }
   };
 

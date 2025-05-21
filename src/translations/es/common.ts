@@ -1,4 +1,3 @@
-
 export default {
   processing: 'Procesando...',
   allRightsReserved: 'Todos los derechos reservados.',
@@ -36,4 +35,6 @@ export default {
   continueCompletingTasks: "¡Continúa completando tareas para ganar más y desbloquear retiros!",
   gotIt: "Entendido",
   quickSelect: "Selección rápida",
+  minimumAmountRequired: "Monto Mínimo Requerido",
+  minimumAmountRequiredDescription: "Solo puedes retirar o solicitar un retiro con un monto mínimo de $1000.",
 };

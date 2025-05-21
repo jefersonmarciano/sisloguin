@@ -1,4 +1,3 @@
-
 export default {
   processing: 'Processing...',
   allRightsReserved: 'All rights reserved.',
@@ -36,4 +35,6 @@ export default {
   continueCompletingTasks: "Continue completing tasks to earn more and unlock withdrawals!",
   gotIt: "Got it",
   quickSelect: "Quick select",
+  minimumAmountRequired: "Minimum Amount Required",
+  minimumAmountRequiredDescription: "You can only withdraw or request a withdrawal with a minimum amount of $1000.",
 };

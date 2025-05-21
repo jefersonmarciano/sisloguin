@@ -33,4 +33,6 @@ export default {
   continueCompletingTasks: 'Continuez à accomplir des tâches pour gagner plus et débloquer les retraits !',
   gotIt: 'Compris',
   quickSelect: 'Sélection rapide',
+  minimumAmountRequired: 'Montant minimum requis',
+  minimumAmountRequiredDescription: 'Vous ne pouvez retirer ou demander un retrait qu\'avec un montant minimum de 1000$.',
 }; 

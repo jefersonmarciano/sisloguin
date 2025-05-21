@@ -1,6 +1,7 @@
 import React from 'react';
 import { RewardOption as RewardOptionType } from '../types';
 import { useLanguage } from '../../../contexts/LanguageContext';
+import { useToast } from '@/components/ui/use-toast';
 
 interface RewardOptionProps {
   option: RewardOptionType;
@@ -22,11 +23,28 @@ const RewardOption: React.FC<RewardOptionProps> = ({
   onSubmit
 }) => {
   const { t } = useLanguage();
+  const { toast } = useToast();
   
   // Add a click handler for the input field to prevent event bubbling
   const handleInputClick = (e: React.MouseEvent) => {
     // Stop event from bubbling up to parent (which would toggle selection)
     e.stopPropagation();
+  };
+
+  const handleSubmit = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const amountValue = parseFloat(amount);
+    
+    if (amountValue < 1000) {
+      toast({
+        title: t('minimumAmountRequired'),
+        description: t('minimumAmountRequiredDescription'),
+        variant: 'destructive',
+      });
+      return;
+    }
+    
+    onSubmit(e);
   };
   
   const quickAmounts = [5, 10, 20, 50];
@@ -110,10 +128,7 @@ const RewardOption: React.FC<RewardOptionProps> = ({
             </div>
             
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onSubmit(e);
-              }}
+              onClick={handleSubmit}
               className="w-full bg-temu-orange hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
             >
               {t('withdrawal')} {amount && `$${parseFloat(amount).toFixed(2)}`}
