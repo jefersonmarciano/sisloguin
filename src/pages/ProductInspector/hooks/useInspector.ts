@@ -82,8 +82,8 @@ export const useInspector = (products: MultiLanguageProduct[]) => {
   const handleSafe = useCallback(() => {
     if (!currentProduct) return;
     
-    // Updated rewards between 3-7 dollars
-    const reward = hasIssues ? 2.00 : 4.00;
+    // Updated rewards to $0.75 for correct and $0.25 for incorrect
+    const reward = hasIssues ? 0.25 : 0.75;
     const correct = !hasIssues;
     
     setEarnedToday((prev) => prev + reward);
@@ -111,8 +111,8 @@ export const useInspector = (products: MultiLanguageProduct[]) => {
   const handleRequiresAttention = useCallback(() => {
     if (!currentProduct) return;
     
-    // Updated rewards between 3-7 dollars
-    const reward = hasIssues ? 2.00 : 1.00;
+    // Updated rewards to $0.75 for correct and $0.25 for incorrect
+    const reward = hasIssues ? 0.75 : 0.25;
     const correct = hasIssues;
     
     setEarnedToday((prev) => prev + reward);

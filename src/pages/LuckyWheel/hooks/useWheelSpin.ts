@@ -20,14 +20,14 @@ export const useWheelSpin = () => {
   
   // Wheel segments with updated higher values (3-7 dollars and one $100 prize)
   const segments: WheelSegment[] = useMemo(() => [
-    { value: 0.75, color: '#f97316', label: '$0.75' },
-    { value: 1.25, color: '#3498db', label: '$1.25' },
-    { value: 1.00, color: '#2ecc71', label: '$1.00' },
-    { value: 0.00, color: '#374151', label: t('tryAgain') },
-    { value: 1.75, color: '#9b59b6', label: '$1.75' },
-    { value: 25.00, color: '#e67e22', label: '$25.00' },
-    { value: 1.50, color: '#f39c12', label: '$1.50' },
-    { value: 0.00, color: '#374151', label: t('tryAgain') },
+    { value: 1.50, color: '#FF6B6B', label: '$1.50' },
+    { value: 2.00, color: '#4ECDC4', label: '$2.00' },
+    { value: 1.75, color: '#FFD93D', label: '$1.75' },
+    { value: 0.00, color: '#95A5A6', label: t('tryAgain') },
+    { value: 2.50, color: '#6C5CE7', label: '$2.50' },
+    { value: 25.00, color: '#FF9F1C', label: '$25.00' },
+    { value: 2.25, color: '#2ECC71', label: '$2.25' },
+    { value: 0.00, color: '#95A5A6', label: t('tryAgain') },
   ], [t]);
   
   const segmentAngle = 360 / segments.length;

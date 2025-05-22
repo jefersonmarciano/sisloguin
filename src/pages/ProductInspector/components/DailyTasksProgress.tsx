@@ -36,7 +36,7 @@ const DailyTasksProgress: React.FC<DailyTasksProgressProps> = ({
       
       <div className="flex justify-between items-center text-sm text-gray-400">
         <div>{t('earnPerInspection')}</div>
-        <div>{t('potentialEarnings')}: {t('upTo')} $65.00 {t('daily')}</div>
+        <div>{t('potentialEarnings')}: {t('upTo')} $10.00 {t('daily')}</div>
       </div>
     </div>
   );
