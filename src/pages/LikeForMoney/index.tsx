@@ -104,7 +104,7 @@ const LikeForMoney: React.FC = () => {
     if (!user) return;
     
     const endTime = new Date();
-    endTime.setHours(endTime.getHours() + 6);
+    endTime.setHours(endTime.getHours() + 24);
     
     const { error } = await supabase
       .from('user_cooldowns')

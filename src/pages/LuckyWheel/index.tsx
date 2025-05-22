@@ -129,24 +129,25 @@ const LuckyWheel: React.FC = () => {
     }
   };
 
-  // Only show summary after 3 spins, do NOT add cooldown here
+  const onSpinClick = async () => {
+    if (wheelsRemaining <= 0 || cooldownEndTime) return; // Prevent spin if no wheels remaining or cooldown active
+    
+    await handleSpin(wheelsRemaining);
+    await addCooldown(); // Add cooldown immediately after spin
+
+    setTimeout(() => {
+      if (!showSessionSummary) {
+        setShowSessionSummary(true);
+      }
+    }, 10000);
+  };
+
+  // Remove the duplicate cooldown effect since we're handling it in onSpinClick
   useEffect(() => {
-    if (wheelsRemaining <= 0 && !cooldownEndTime && wheelResults.length === 3) {
+    if (wheelsRemaining <= 0 && !cooldownEndTime && wheelResults.length === 1) {
       setShowSessionSummary(true);
     }
   }, [wheelsRemaining, wheelResults.length, cooldownEndTime]);
-
-  const onSpinClick = async () => {
-    await handleSpin(wheelsRemaining);
-
-    if (wheelsRemaining <= 1) {
-      setTimeout(() => {
-        if (!showSessionSummary && !cooldownEndTime) {
-          setShowSessionSummary(true);
-        }
-      }, 10000);
-    }
-  };
 
   if (isCheckingCooldown) {
     return (
@@ -158,7 +159,7 @@ const LuckyWheel: React.FC = () => {
     );
   }
 
-  if (cooldownEndTime) {
+  if (cooldownEndTime || wheelsRemaining <= 0) {
     return (
       <div className="animate-fade-in max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
@@ -174,7 +175,7 @@ const LuckyWheel: React.FC = () => {
 
         <div className="flex items-center justify-center h-full">
           <WheelCooldownTimer 
-            endTime={new Date(cooldownEndTime)}
+            endTime={new Date(cooldownEndTime || new Date(Date.now() + 24 * 60 * 60 * 1000))}
             onComplete={() => {
               clearCooldown();
               setWheelResults([]);
@@ -218,7 +219,6 @@ const LuckyWheel: React.FC = () => {
             results={wheelResults}
             onContinue={() => {
               setShowSessionSummary(false);
-              addCooldown(); // ✅ Cooldown added only once here
             }}
           />
         ) : (

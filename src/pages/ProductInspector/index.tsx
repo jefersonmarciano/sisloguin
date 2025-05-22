@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { mockProducts } from './mockData';
 import { useInspector } from './hooks/useInspector';
+import { supabase } from '../../lib/supabase';
 
 // Import components
 import ProductInspectorHeader from './components/ProductInspectorHeader';
@@ -36,21 +37,47 @@ const ProductInspector: React.FC = () => {
   const balance = user?.balance || 0;
   
   // Show result screen after each assessment
-  const handleSafeWithFeedback = () => {
-    handleSafe();
+  const handleSafeWithFeedback = async () => {
+    await handleSafe();
     if (reviewsCompleted + 1 >= reviewsLimit) {
+      await addCooldown();
       setShowSessionSummary(true);
     } else {
       setShowResultScreen(true);
     }
   };
   
-  const handleRequiresAttentionWithFeedback = () => {
-    handleRequiresAttention();
+  const handleRequiresAttentionWithFeedback = async () => {
+    await handleRequiresAttention();
     if (reviewsCompleted + 1 >= reviewsLimit) {
+      await addCooldown();
       setShowSessionSummary(true);
     } else {
       setShowResultScreen(true);
+    }
+  };
+  
+  const addCooldown = async () => {
+    if (!user) return;
+    
+    const endTime = new Date();
+    endTime.setHours(endTime.getHours() + 24);
+    
+    const { error } = await supabase
+      .from('user_cooldowns')
+      .upsert({
+        user_id: user.id,
+        feature: 'product_inspector',
+        end_time: endTime.toISOString(),
+        created_at: new Date().toISOString()
+      }, {
+        onConflict: 'user_id,feature'
+      });
+    
+    if (error) {
+      console.error('Error setting cooldown:', error);
+    } else {
+      setShowCooldown(true);
     }
   };
   
