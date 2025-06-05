@@ -11,7 +11,8 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+     "start": "vite preview"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.2.1",
